@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/velocity-lightmode.svg" alt="Velocity" width="370" />
+  <img src="src/assets/branding/logo-full.svg" alt="Velocity" width="370" />
 </p>
 
 <p align="center">
