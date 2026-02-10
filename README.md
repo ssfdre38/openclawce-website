@@ -17,7 +17,7 @@
 
 ## Overview
 
-Velocity accelerates Astro project delivery with a comprehensive foundation that includes a design token system, 24 UI components, SEO optimization, dynamic OG image generation, and content management — built on Astro 6 (beta) and Tailwind CSS v4.
+Velocity accelerates Astro project delivery with a comprehensive foundation that includes a design token system, 57 components across 7 categories, SEO optimization, dynamic OG image generation, and content management — built on Astro 6 (beta) and Tailwind CSS v4.
 
 ### Key Features
 
@@ -26,7 +26,7 @@ Velocity accelerates Astro project delivery with a comprehensive foundation that
 | **Astro 6** | Latest version with Content Layer API, security features, and performance optimizations |
 | **Tailwind CSS v4** | CSS-first configuration with OKLCH color system and fluid typography |
 | **Design Tokens** | Three-tier token architecture (reference → semantic → component) |
-| **24 UI Components** | Accessible, composable primitives with TypeScript support |
+| **57 Components** | 31 UI, 7 patterns, 1 hero, 4 layout, 4 blog, 7 landing, 3 SEO — all accessible with TypeScript |
 | **SEO Toolkit** | Meta tags, JSON-LD structured data, sitemap, and robots.txt |
 | **Dynamic OG Images** | Auto-generated Open Graph images using Satori |
 | **Dark Mode** | System preference detection with localStorage persistence |
@@ -86,8 +86,16 @@ velocity/
 ├── src/
 │   ├── assets/              # Images and icons (processed by Astro)
 │   ├── components/
-│   │   ├── ui/              # Primitive components (Button, Input, Card...)
-│   │   ├── patterns/        # Composed components (Forms, Cards)
+│   │   ├── ui/              # UI component library (31 components)
+│   │   │   ├── form/        # Button, Input, Textarea, Select, Checkbox, Radio, Switch
+│   │   │   ├── data-display/ # Card, Badge, Avatar, Table, Pagination, Progress, Skeleton
+│   │   │   ├── feedback/    # Alert, Toast, Tooltip
+│   │   │   ├── overlay/     # Dialog, Dropdown, Tabs, VerticalTabs, Accordion
+│   │   │   ├── layout/      # Separator
+│   │   │   ├── primitives/  # Icon
+│   │   │   ├── content/     # CodeBlock
+│   │   │   └── marketing/   # Logo, CTA, NpmCopyButton, SocialProof, TerminalDemo
+│   │   ├── patterns/        # Composed patterns (ContactForm, SearchInput, StatCard, etc.)
 │   │   ├── layout/          # Header, Footer, Navigation, ThemeToggle
 │   │   ├── seo/             # SEO, JsonLd, Breadcrumbs
 │   │   ├── blog/            # Blog-specific components
@@ -220,27 +228,102 @@ import ThemeToggle from '@/components/layout/ThemeToggle.astro';
 
 ## Components
 
-Velocity includes 24 accessible, composable UI components.
+Velocity includes 57 components across 7 categories. All UI components use [class-variance-authority (CVA)](https://cva.style) for type-safe variant management and are organized into 8 subcategories.
 
-### Core Components
+### UI Components (31)
 
-| Component | Variants | Description |
-|-----------|----------|-------------|
-| Button | primary, secondary, outline, ghost, destructive | Interactive button with loading state |
-| Input | text, email, password, search | Form input with label, error, hint |
-| Textarea | - | Multi-line text input |
-| Select | - | Dropdown selection |
-| Checkbox | - | Boolean toggle with indeterminate |
-| Radio | - | Single selection from group |
-| Card | - | Content container with padding/shadow |
-| Badge | default, success, warning, error | Status indicators |
-| Alert | info, success, warning, error | Dismissible notifications |
-| Dialog | - | Modal overlay |
-| Dropdown | - | Menu with trigger |
-| Tabs | - | Tabbed content panels |
-| Tooltip | top, bottom, left, right | Contextual hints |
-| Avatar | - | User images with fallback |
-| Skeleton | - | Loading placeholders |
+#### Form (`ui/form/`)
+
+| Component | Description |
+|-----------|-------------|
+| Button | Interactive button with primary, secondary, outline, ghost, destructive variants and loading state |
+| Input | Text input with label, hint, and error states |
+| Textarea | Multi-line text input |
+| Select | Dropdown selection |
+| Checkbox | Boolean toggle with indeterminate state |
+| Radio | Single selection from group |
+| Switch | Toggle switch input |
+
+#### Data Display (`ui/data-display/`)
+
+| Component | Description |
+|-----------|-------------|
+| Card | Content container with variant, padding, and hover options |
+| Badge | Status labels and tags with contextual variants |
+| Avatar | User images with fallback |
+| AvatarGroup | Grouped avatar display with overlap |
+| Table | Styled data table |
+| Pagination | Page navigation controls |
+| Progress | Progress bar indicator |
+| Skeleton | Loading placeholders |
+
+#### Feedback (`ui/feedback/`)
+
+| Component | Description |
+|-----------|-------------|
+| Alert | Contextual feedback messages (info, success, warning, error) |
+| Toast | Temporary notification messages |
+| Tooltip | Hover tooltips with positioning |
+
+#### Overlay (`ui/overlay/`)
+
+| Component | Description |
+|-----------|-------------|
+| Dialog | Modal overlay |
+| Dropdown | Menu with trigger |
+| Tabs | Horizontal tabbed content panels |
+| VerticalTabs | Vertical tab navigation |
+| Accordion | Collapsible content sections |
+
+#### Layout (`ui/layout/`)
+
+| Component | Description |
+|-----------|-------------|
+| Separator | Visual divider between sections |
+
+#### Primitives (`ui/primitives/`)
+
+| Component | Description |
+|-----------|-------------|
+| Icon | SVG icon component |
+
+#### Content (`ui/content/`)
+
+| Component | Description |
+|-----------|-------------|
+| CodeBlock | Syntax-highlighted code display |
+
+#### Marketing (`ui/marketing/`)
+
+| Component | Description |
+|-----------|-------------|
+| Logo | Brand logo with size variants and dark mode |
+| CTA | Call-to-action sections with slot-based composition |
+| NpmCopyButton | NPM install command with copy-to-clipboard |
+| SocialProof | Testimonial and trust indicator cards |
+| TerminalDemo | Animated terminal demonstration (React) |
+
+### Pattern Components (7)
+
+| Component | Description |
+|-----------|-------------|
+| ContactForm | Complete contact form with validation |
+| NewsletterForm | Email subscription form |
+| FormField | Reusable form field wrapper |
+| SearchInput | Search input with icon |
+| PasswordInput | Password input with visibility toggle |
+| StatCard | Statistics display card |
+| EmptyState | Empty state placeholder with icon and action |
+
+### Other Categories
+
+| Category | Count | Components |
+|----------|-------|------------|
+| Hero | 1 | Hero section with centered/split layouts, grid, and blob effects |
+| Layout | 4 | Header, Footer, ThemeToggle, Analytics |
+| Blog | 4 | ArticleHero, BlogCard, ShareButtons, RelatedPosts |
+| Landing | 7 | Credibility, LighthouseScores, TechStack, FeatureTabs, Navbar, and more |
+| SEO | 3 | SEO, JsonLd, Breadcrumbs |
 
 ### Usage Example
 
@@ -255,7 +338,7 @@ import { Button, Input, Card } from '@/components/ui';
 </Card>
 ```
 
-View all components at `/components` in development.
+All UI components are imported via barrel exports from `@/components/ui`. View all components at `/components` in development.
 
 ---
 
@@ -438,6 +521,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## Links
 
+- [Documentation](https://github.com/southwellmedia/velocity-docs)
 - [CLI Tool](https://github.com/southwellmedia/create-velocity-astro)
 - [Astro Documentation](https://docs.astro.build)
 - [Tailwind CSS v4](https://tailwindcss.com/docs)

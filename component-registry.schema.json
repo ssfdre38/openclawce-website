@@ -92,6 +92,10 @@
           "type": "string",
           "description": "Category ID this component belongs to"
         },
+        "subcategory": {
+          "type": "string",
+          "description": "Subcategory within the main category (e.g., form, data-display, feedback)"
+        },
         "files": {
           "type": "array",
           "items": {
