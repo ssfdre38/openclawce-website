@@ -3,11 +3,12 @@
  * Pagination Component
  * Page navigation with prev/next and numbered pages.
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { paginationItemVariants } from './pagination.variants';
 import Icon from '../../primitives/Icon/Icon.astro';
 
-interface Props {
+interface Props extends HTMLAttributes<'nav'> {
   /** Current active page (1-indexed) */
   currentPage: number;
   /** Total number of pages */
@@ -17,7 +18,6 @@ interface Props {
   /** Maximum number of visible page buttons */
   maxVisible?: number;
   size?: 'sm' | 'md' | 'lg';
-  class?: string;
 }
 
 const {
@@ -27,6 +27,7 @@ const {
   maxVisible = 5,
   size = 'md',
   class: className,
+  ...attrs
 } = Astro.props;
 
 /**
@@ -78,7 +79,7 @@ const prevUrl = currentPage > 1 ? `${baseUrl}${currentPage - 1}` : undefined;
 const nextUrl = currentPage < totalPages ? `${baseUrl}${currentPage + 1}` : undefined;
 ---
 
-<nav class={cn('flex items-center gap-1', className)} aria-label="Pagination">
+<nav class={cn('flex items-center gap-1', className)} aria-label="Pagination" {...attrs}>
   {/* Previous */}
   {prevUrl ? (
     <a

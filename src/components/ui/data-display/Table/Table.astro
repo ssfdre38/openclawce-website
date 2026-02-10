@@ -3,6 +3,7 @@
  * Table Component
  * A styled data table with hover rows and responsive design.
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 
 interface Column {
@@ -12,7 +13,7 @@ interface Column {
   class?: string;
 }
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   columns: Column[];
   rows: Record<string, unknown>[];
   /** Enable row hover highlighting */
@@ -21,7 +22,6 @@ interface Props {
   striped?: boolean;
   /** Make table compact */
   compact?: boolean;
-  class?: string;
 }
 
 const {
@@ -31,6 +31,7 @@ const {
   striped = false,
   compact = false,
   class: className,
+  ...attrs
 } = Astro.props;
 
 const alignClasses = {
@@ -42,7 +43,7 @@ const alignClasses = {
 const cellPadding = compact ? 'px-3 py-2' : 'px-4 py-3';
 ---
 
-<div class={cn('w-full overflow-auto rounded-lg border border-border', className)}>
+<div class={cn('w-full overflow-auto rounded-lg border border-border', className)} {...attrs}>
   <table class="w-full text-sm">
     <thead>
       <tr class="border-b border-border bg-secondary/50">

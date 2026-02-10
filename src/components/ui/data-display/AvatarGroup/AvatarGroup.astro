@@ -3,6 +3,7 @@
  * AvatarGroup Component
  * Displays stacked avatars with an optional "+N" overflow indicator.
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import Avatar from '../Avatar/Avatar.astro';
 
@@ -12,12 +13,11 @@ interface AvatarItem {
   fallback?: string;
 }
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   avatars: AvatarItem[];
   /** Maximum number of avatars to show before "+N" */
   max?: number;
   size?: 'xs' | 'sm' | 'md' | 'lg';
-  class?: string;
 }
 
 const {
@@ -25,6 +25,7 @@ const {
   max = 4,
   size = 'md',
   class: className,
+  ...attrs
 } = Astro.props;
 
 const visibleAvatars = avatars.slice(0, max);
@@ -38,7 +39,7 @@ const overflowSizes = {
 };
 ---
 
-<div class={cn('flex -space-x-2', className)}>
+<div class={cn('flex -space-x-2', className)} {...attrs}>
   {visibleAvatars.map((avatar) => (
     <Avatar
       src={avatar.src}

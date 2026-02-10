@@ -3,16 +3,16 @@
  * Tooltip Component
  * Shows additional information on hover with CSS Anchor Positioning (with fallback)
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 
-interface Props {
+interface Props extends HTMLAttributes<'span'> {
   content: string;
   position?: 'top' | 'bottom' | 'left' | 'right';
   delay?: number;
-  class?: string;
 }
 
-const { content, position = 'top', delay = 200, class: className } = Astro.props;
+const { content, position = 'top', delay = 200, class: className, ...attrs } = Astro.props;
 
 ---
 
@@ -21,6 +21,7 @@ const { content, position = 'top', delay = 200, class: className } = Astro.props
   data-tooltip
   data-tooltip-delay={delay}
   data-tooltip-position={position}
+  {...attrs}
 >
   <slot />
   <span

@@ -3,17 +3,17 @@
  * Separator Component
  * A visual divider between content sections
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { separatorVariants } from './separator.variants';
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   orientation?: 'horizontal' | 'vertical';
   /** Optional label displayed in the center of the separator */
   label?: string;
-  class?: string;
 }
 
-const { orientation = 'horizontal', label, class: className } = Astro.props;
+const { orientation = 'horizontal', label, class: className, ...attrs } = Astro.props;
 ---
 
 {label ? (
@@ -25,6 +25,7 @@ const { orientation = 'horizontal', label, class: className } = Astro.props;
     )}
     role="separator"
     aria-orientation={orientation}
+    {...attrs}
   >
     <div class={cn(separatorVariants({ orientation }), 'flex-1')} />
     <span class="text-xs font-medium text-muted-foreground whitespace-nowrap">{label}</span>
@@ -35,5 +36,6 @@ const { orientation = 'horizontal', label, class: className } = Astro.props;
     class={cn(separatorVariants({ orientation }), className)}
     role="separator"
     aria-orientation={orientation}
+    {...attrs}
   />
 )}

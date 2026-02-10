@@ -3,18 +3,18 @@
  * Avatar Component
  * Displays user avatars with fallback initials
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { avatarVariants } from './avatar.variants';
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   src?: string;
   alt?: string;
   fallback?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  class?: string;
 }
 
-const { src, alt = '', fallback, size = 'md', class: className } = Astro.props;
+const { src, alt = '', fallback, size = 'md', class: className, ...attrs } = Astro.props;
 
 // Generate initials from alt text or fallback
 const initials = fallback || alt
@@ -25,7 +25,7 @@ const initials = fallback || alt
   .toUpperCase();
 ---
 
-<div class={cn(avatarVariants({ size }), className)}>
+<div class={cn(avatarVariants({ size }), className)} {...attrs}>
   {src ? (
     <img
       src={src}

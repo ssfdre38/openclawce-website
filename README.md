@@ -179,22 +179,93 @@ BING_SITE_VERIFICATION=your-code
 
 ## Design System
 
-Velocity uses a three-tier design token system with OKLCH colors for perceptual uniformity.
+Velocity uses a three-tier design token system with OKLCH colors for perceptual uniformity:
+
+1. **Primitives** (`src/styles/tokens/primitives.css`) — raw color scales (gray, brand, status)
+2. **Semantic tokens** (`src/styles/themes/*.css`) — purpose-based mappings (background, foreground, border, etc.)
+3. **Tailwind** (`src/styles/global.css`) — `@theme` directives that expose tokens as utility classes
 
 ### Customizing Brand Colors
 
-Edit `src/styles/tokens/colors.css`:
+Edit `src/styles/tokens/primitives.css` and update the `--brand-*` OKLCH values:
 
 ```css
 :root {
-  /* Change the hue (250) to shift your entire brand palette */
-  --ref-brand-500: oklch(58% 0.18 250);
-
-  /* Full palette from 50-950 updates automatically */
+  --brand-50:  oklch(97.5% 0.02 45);  /* lightest tint */
+  --brand-100: oklch(94.8% 0.04 45);
+  --brand-200: oklch(87.5% 0.08 45);
+  --brand-300: oklch(77.8% 0.14 45);
+  --brand-400: oklch(68.5% 0.19 40);
+  --brand-500: oklch(62.5% 0.22 38);  /* primary brand color */
+  --brand-600: oklch(53.2% 0.19 38);
+  --brand-700: oklch(45.5% 0.16 38);
+  --brand-800: oklch(37.2% 0.13 38);
+  --brand-900: oklch(26.5% 0.09 38);
 }
 ```
 
-Use [oklch.com](https://oklch.com) to generate palettes.
+OKLCH values are `oklch(lightness chroma hue)`. To shift your brand to blue, change the hue from `38-45` to `~260`. Use [oklch.com](https://oklch.com) to pick colors visually.
+
+### Switching Themes
+
+Velocity ships with two themes: `default` and `midnight`. To switch, edit `src/styles/tokens/colors.css` line 9:
+
+```css
+/* Default theme */
+@import '../themes/default.css';
+
+/* Or use midnight */
+@import '../themes/midnight.css';
+```
+
+### Creating a New Theme
+
+1. Duplicate `src/styles/themes/default.css` as your starting point
+2. Implement all ~35 semantic tokens for both `:root` (light) and `.dark` (dark):
+
+   **Backgrounds**: `--background`, `--background-secondary`, `--background-tertiary`, `--background-elevated`
+
+   **Foregrounds**: `--foreground`, `--foreground-secondary`, `--foreground-muted`, `--foreground-subtle`
+
+   **Borders**: `--border`, `--border-strong`, `--border-subtle`
+
+   **Interactive**: `--primary`, `--primary-hover`, `--primary-foreground`, `--secondary`, `--secondary-hover`, `--secondary-foreground`, `--accent`, `--accent-hover`, `--accent-light`
+
+   **Surfaces**: `--muted`, `--muted-foreground`, `--card`, `--card-border`, `--input-bg`, `--input-border`, `--input-focus`, `--ring`
+
+   **Destructive**: `--destructive`, `--destructive-foreground`
+
+   **Gradients**: `--gradient-start`, `--gradient-end`
+
+   **Invert sections**: `--surface-invert`, `--surface-invert-secondary`, `--surface-invert-tertiary`, `--on-invert`, `--on-invert-secondary`, `--on-invert-muted`, `--border-invert`, `--border-invert-strong`
+
+3. Update the import in `src/styles/tokens/colors.css` to point to your new theme file
+
+### Dark Mode
+
+Dark mode toggles via the `.dark` class on `<html>`. FOUC is prevented by an inline script that reads `localStorage` before first paint. Use the included `ThemeToggle` component:
+
+```astro
+---
+import ThemeToggle from '@/components/layout/ThemeToggle.astro';
+---
+
+<ThemeToggle />
+```
+
+To opt out of dark mode, remove the `.dark { ... }` block from your theme file.
+
+### WCAG Contrast Requirements
+
+Foreground tokens are documented with their contrast ratios inline. When customizing, maintain these minimums:
+
+| Token | Minimum ratio | Standard |
+|-------|:---:|:---:|
+| `--foreground` | 7:1 | WCAG AAA |
+| `--foreground-secondary` | 7:1 | WCAG AAA |
+| `--foreground-muted` | 4.5:1 | WCAG AA |
+| `--foreground-subtle` | 4.5:1 | WCAG AA |
+| Status `-foreground` tokens | 4.5:1 | WCAG AA (on their `-light` bg) |
 
 ### Using Design Tokens
 
@@ -207,21 +278,10 @@ Use [oklch.com](https://oklch.com) to generate palettes.
 <!-- CSS custom properties -->
 <style>
   .custom {
-    background: var(--sem-bg-primary);
+    background: var(--background-secondary);
+    color: var(--foreground);
   }
 </style>
-```
-
-### Dark Mode
-
-Dark mode toggles automatically with the `.dark` class. Use the included `ThemeToggle` component:
-
-```astro
----
-import ThemeToggle from '@/components/layout/ThemeToggle.astro';
----
-
-<ThemeToggle />
 ```
 
 ---
@@ -322,7 +382,7 @@ Velocity includes 57 components across 7 categories. All UI components use [clas
 | Hero | 1 | Hero section with centered/split layouts, grid, and blob effects |
 | Layout | 4 | Header, Footer, ThemeToggle, Analytics |
 | Blog | 4 | ArticleHero, BlogCard, ShareButtons, RelatedPosts |
-| Landing | 7 | Credibility, LighthouseScores, TechStack, FeatureTabs, Navbar, and more |
+| Landing | 5 | Credibility, LighthouseScores, TechStack, FeatureTabs, and more |
 | SEO | 3 | SEO, JsonLd, Breadcrumbs |
 
 ### Usage Example

@@ -3,18 +3,18 @@
  * Alert Component
  * Contextual feedback messages with refined design system integration
  */
+import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import Icon from '../../primitives/Icon/Icon.astro';
 import { alertVariants, alertIconColors, alertAccentColors } from './alert.variants';
 
-interface Props {
+interface Props extends HTMLAttributes<'div'> {
   variant?: 'info' | 'success' | 'warning' | 'error';
   title?: string;
   dismissible?: boolean;
-  class?: string;
 }
 
-const { variant = 'info', title, dismissible = false, class: className } = Astro.props;
+const { variant = 'info', title, dismissible = false, class: className, ...attrs } = Astro.props;
 
 const icons: Record<string, 'info' | 'check-circle' | 'alert-triangle' | 'x-circle'> = {
   info: 'info',
@@ -28,6 +28,7 @@ const icons: Record<string, 'info' | 'check-circle' | 'alert-triangle' | 'x-circ
   class={cn(alertVariants({ variant }), className)}
   role="alert"
   data-alert
+  {...attrs}
 >
   {/* Accent bar */}
   <div class={cn('absolute left-0 top-0 bottom-0 w-1', alertAccentColors[variant])} />
