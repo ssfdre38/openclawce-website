@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 export const inputVariants = cva(
   [
     'w-full rounded-lg border',
-    'transition-colors duration-[--transition-fast]',
+    'transition-colors duration-(--transition-fast)',
     'focus-visible:outline-none focus-visible:ring-2',
     'disabled:cursor-not-allowed disabled:opacity-50',
     'bg-background border-border',

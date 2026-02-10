@@ -174,7 +174,7 @@ const buttonId = `${menuId}-button`;
                 href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
                 class={cn(
                   'nav-link rounded-md px-3 py-2 text-sm',
-                  'transition-all duration-[--transition-fast]',
+                  'transition-all duration-(--transition-fast)',
                   isActive(href)
                     ? 'nav-link-active font-semibold text-foreground bg-secondary'
                     : 'nav-link-inactive font-medium text-foreground-muted hover:text-foreground hover:bg-secondary/70'
@@ -274,7 +274,7 @@ const buttonId = `${menuId}-button`;
                 href={href.startsWith('#') && !isLandingPage ? `/${href}` : href}
                 class={cn(
                   'mobile-nav-link block rounded-md px-3 py-2 text-sm',
-                  'transition-all duration-[--transition-fast]',
+                  'transition-all duration-(--transition-fast)',
                   isActive(href)
                     ? 'mobile-nav-link-active bg-secondary text-foreground font-semibold'
                     : 'mobile-nav-link-inactive text-foreground-muted hover:bg-secondary/70 hover:text-foreground font-medium'
