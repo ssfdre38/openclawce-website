@@ -12,10 +12,14 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { label: 'Components', href: '/components', order: 1 },
-  { label: 'Blog', href: '/blog', order: 2 },
-  { label: 'About', href: '/about', order: 3 },
-  { label: 'Contact', href: '/contact', order: 4 },
+  { label: 'Features', href: '/features', order: 1 },
+  { label: 'Integrations', href: '/integrations', order: 2 },
+  { label: 'Ollama CE', href: '/ollama-ce', order: 3 },
+  { label: 'Documentation', href: '/docs', order: 4 },
+  { label: 'Downloads', href: '/downloads', order: 5 },
+  { label: 'About', href: '/about', order: 6 },
+  { label: 'Community', href: '/community', order: 7 },
+  { label: 'Blog', href: '/blog', order: 8 },
 ];
 
 /**

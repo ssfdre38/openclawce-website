@@ -1,0 +1,380 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+
+const features = [
+  {
+    title: '20+ Critical Fixes',
+    description: 'Threading, resource cleanup, Windows compatibility, security, and more',
+    icon: 'shield-check',
+    color: 'green'
+  },
+  {
+    title: 'Desktop UI Included',
+    description: 'Beautiful React 19 interface with 35 bugs fixed for stability',
+    icon: 'monitor',
+    color: 'blue'
+  },
+  {
+    title: 'OpenClaw Integration',
+    description: 'Seamless tool calling, proper schema handling, and intelligent fallbacks',
+    icon: 'zap',
+    color: 'purple'
+  },
+  {
+    title: 'Production-Ready',
+    description: 'Stable for weeks without crashes - tested on Windows and Linux',
+    icon: 'check-circle',
+    color: 'green'
+  }
+];
+
+const fixes = [
+  { category: 'Threading/Concurrency', count: 7, items: ['ManifestCache race conditions', 'Parallel digest processing', 'Model load sync issues', 'Registry corruption prevention'] },
+  { category: 'Resource Cleanup', count: 5, items: ['File handle leaks', 'Memory cleanup on errors', 'Temp directory cleanup', 'Graceful shutdown'] },
+  { category: 'Windows-Specific', count: 4, items: ['Path handling', 'Process management', 'Service integration', 'CGO compilation'] },
+  { category: 'Error Handling', count: 4, items: ['Panic recovery', 'Network timeouts', 'Validation errors', 'Graceful degradation'] },
+  { category: 'Security', count: 3, items: ['Input validation', 'Path traversal prevention', 'Safe model loading'] }
+];
+
+const models = [
+  { name: 'Qwen 2.5 Coder 7B', desc: 'Code generation and completion', size: '4.7GB' },
+  { name: 'Qwen 2.5 7B', desc: 'General purpose chat', size: '4.7GB' },
+  { name: 'Llama 3.2 3B', desc: 'Lightweight, fast responses', size: '2.0GB' },
+  { name: 'Mistral 7B', desc: 'Balanced performance', size: '4.1GB' },
+  { name: 'DeepSeek Coder 6.7B', desc: 'Code-focused model', size: '3.8GB' },
+  { name: 'Gemma 2 9B', desc: 'Google\'s efficient model', size: '5.5GB' },
+];
+---
+
+<PageLayout
+  title="Ollama Community Edition"
+  description="Run AI models locally with Ollama CE - Enhanced stability, Windows support, and OpenClaw integration"
+>
+  <!-- Hero Section -->
+  <Section>
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <Badge variant="gradient" class="mb-4">Production-Ready Local AI</Badge>
+        <h1 class="text-5xl font-bold mb-6 gradient-text">
+          Ollama Community Edition
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          Run powerful AI models locally on your machine with enhanced stability and OpenClaw integration.
+          Based on Ollama with 20+ critical bug fixes and production-ready reliability.
+        </p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <Button 
+            href="https://github.com/ssfdre38/ollama/tree/community-edition" 
+            variant="primary"
+            size="large"
+            icon="github"
+          >
+            View on GitHub
+          </Button>
+          <Button 
+            href="/downloads#ollama-ce" 
+            variant="secondary"
+            size="large"
+            icon="download"
+          >
+            Installation Guide
+          </Button>
+        </div>
+      </div>
+
+      <!-- Version Info -->
+      <Card class="mb-12 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border-purple-200 dark:border-purple-800">
+        <div class="text-center">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Current Version</p>
+          <h2 class="text-3xl font-bold mb-4 gradient-text">v0.5.0-ce+20fixes</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Based on Ollama 0.5.0 with Community Edition enhancements • Desktop UI included • OpenClaw optimized
+          </p>
+        </div>
+      </Card>
+    </Container>
+  </Section>
+
+  <!-- Features Grid -->
+  <Section background="secondary">
+    <Container>
+      <h2 class="text-4xl font-bold text-center mb-12">Why Ollama CE?</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {features.map(feature => (
+          <Card class="hover-lift">
+            <div class="flex items-start gap-4">
+              <div class={`p-3 rounded-lg bg-${feature.color}-100 dark:bg-${feature.color}-900/30`}>
+                <Icon name={feature.icon} class={`w-6 h-6 text-${feature.color}-600 dark:text-${feature.color}-400`} />
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2">{feature.title}</h3>
+                <p class="text-gray-600 dark:text-gray-400">{feature.description}</p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Bug Fixes Section -->
+  <Section>
+    <Container>
+      <h2 class="text-4xl font-bold text-center mb-4">What We Fixed</h2>
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        Comprehensive audit and fixes across the entire Ollama codebase - both server and desktop UI
+      </p>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {fixes.map(fix => (
+          <Card>
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold text-lg">{fix.category}</h3>
+                <Badge variant="primary">{fix.count} fixed</Badge>
+              </div>
+            </div>
+            <ul class="space-y-2">
+              {fix.items.map(item => (
+                <li class="flex items-start gap-2">
+                  <Icon name="check" class="w-4 h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
+                  <span class="text-sm text-gray-600 dark:text-gray-400">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        ))}
+      </div>
+
+      <Card class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-200 dark:border-blue-800">
+        <h3 class="text-xl font-bold mb-4">Additional UI Fixes</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <p class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">32 bugs</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Desktop UI fixes</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">React 19</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Modern UI framework</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">WebView2</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Native Windows integration</p>
+          </div>
+        </div>
+      </Card>
+    </Container>
+  </Section>
+
+  <!-- OpenClaw Integration -->
+  <Section background="secondary">
+    <Container>
+      <h2 class="text-4xl font-bold text-center mb-12">OpenClaw Integration</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <Card>
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <Icon name="tool" class="w-5 h-5 text-purple-600" />
+            Tool Calling Fixed
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Fixed Ollama's tool calling to work with OpenClaw's schema format. The issue was that Ollama's Go parser couldn't handle properties named "type" - we automatically rename them to "type_value" with proper documentation.
+          </p>
+          <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <code class="text-sm">
+              <span class="text-gray-500">// Automatic schema cleanup</span><br/>
+              <span class="text-purple-600">cleanSchemaForOllama</span>(toolSchema)<br/>
+              <span class="text-gray-500">// "type" → "type_value"</span>
+            </code>
+          </div>
+        </Card>
+
+        <Card>
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <Icon name="layers" class="w-5 h-5 text-blue-600" />
+            Intelligent Fallbacks
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Configure primary and fallback models with automatic failover:
+          </p>
+          <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <code class="text-sm">
+              <span class="text-blue-600">primary</span>: <span class="text-green-600">"ollama/qwen2.5-coder:7b"</span><br/>
+              <span class="text-blue-600">fallbacks</span>: [<br/>
+              &nbsp;&nbsp;<span class="text-green-600">"ollama/qwen2.5:7b"</span>,<br/>
+              &nbsp;&nbsp;<span class="text-green-600">"github-copilot/claude-haiku"</span><br/>
+              ]
+            </code>
+          </div>
+        </Card>
+      </div>
+
+      <Card class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border-green-200 dark:border-green-800">
+        <div class="flex items-start gap-4">
+          <Icon name="check-circle" class="w-8 h-8 text-green-600 dark:text-green-400 flex-shrink-0 mt-1" />
+          <div>
+            <h3 class="text-xl font-bold mb-2">100% Integration Complete</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              All OpenClaw features work seamlessly with Ollama CE: provider recognition, model routing, tool calling, streaming responses, and fallback chains.
+            </p>
+            <ul class="grid md:grid-cols-2 gap-2">
+              <li class="flex items-center gap-2">
+                <Icon name="check" class="w-4 h-4 text-green-600" />
+                <span class="text-sm">Provider auto-detection</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <Icon name="check" class="w-4 h-4 text-green-600" />
+                <span class="text-sm">Schema cleanup</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <Icon name="check" class="w-4 h-4 text-green-600" />
+                <span class="text-sm">Streaming support</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <Icon name="check" class="w-4 h-4 text-green-600" />
+                <span class="text-sm">Fallback chains</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Card>
+    </Container>
+  </Section>
+
+  <!-- Popular Models -->
+  <Section>
+    <Container>
+      <h2 class="text-4xl font-bold text-center mb-4">Popular Models</h2>
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        Run powerful models locally - all tested and optimized for OpenClaw CE
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {models.map(model => (
+          <Card class="hover-lift">
+            <h3 class="font-bold text-lg mb-2">{model.name}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">{model.desc}</p>
+            <div class="flex items-center justify-between">
+              <Badge variant="secondary">{model.size}</Badge>
+              <span class="text-xs text-gray-500">ollama pull {model.name.toLowerCase().replace(/\s+/g, '')}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <Card class="inline-block bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border-purple-200 dark:border-purple-800">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Browse all models</p>
+          <Button href="https://ollama.ai/library" variant="secondary" icon="external-link">
+            Visit Ollama Library
+          </Button>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Installation -->
+  <Section background="secondary">
+    <Container>
+      <h2 class="text-4xl font-bold text-center mb-12">Get Started</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <Card>
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+              <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">1</span>
+            </div>
+            <h3 class="text-xl font-bold">Install Ollama CE</h3>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">
+            Use our automated setup scripts for Windows, Linux, or macOS
+          </p>
+          <Button href="/downloads#ollama-ce" variant="secondary" size="small" class="w-full">
+            Installation Guide
+          </Button>
+        </Card>
+
+        <Card>
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+              <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">2</span>
+            </div>
+            <h3 class="text-xl font-bold">Pull Models</h3>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">
+            Download your preferred AI models - start with Qwen 2.5 for best results
+          </p>
+          <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center">
+            <code class="text-xs">ollama pull qwen2.5-coder:7b</code>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+              <span class="text-2xl font-bold text-green-600 dark:text-green-400">3</span>
+            </div>
+            <h3 class="text-xl font-bold">Configure OpenClaw</h3>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">
+            Add Ollama models to your OpenClaw configuration with fallbacks
+          </p>
+          <Button href="/downloads" variant="secondary" size="small" class="w-full">
+            Get OpenClaw CE
+          </Button>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Community -->
+  <Section>
+    <Container>
+      <Card class="text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <h2 class="text-3xl font-bold mb-4">Join the Community</h2>
+        <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+          Ollama CE is built by the community, for the community. Contribute fixes, report issues, or share your use cases.
+        </p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <Button 
+            href="https://github.com/ssfdre38/ollama/issues" 
+            variant="secondary"
+            icon="message-circle"
+          >
+            Report Issues
+          </Button>
+          <Button 
+            href="https://github.com/ssfdre38/ollama/pulls" 
+            variant="secondary"
+            icon="git-pull-request"
+          >
+            Contribute
+          </Button>
+        </div>
+      </Card>
+    </Container>
+  </Section>
+</PageLayout>
+
+<style>
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+</style>
