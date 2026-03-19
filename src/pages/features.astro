@@ -1,0 +1,131 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+
+const features = [
+  {
+    icon: 'zap',
+    title: 'Multi-Provider AI Support',
+    description: 'Seamlessly work with OpenAI, Anthropic Claude, Google Gemini, and local models via Ollama. Switch providers on the fly or use multiple models in the same conversation.',
+    badge: 'Core'
+  },
+  {
+    icon: 'shield-check',
+    title: 'Self-Hosted & Private',
+    description: 'Full control over your data and AI interactions. Deploy on your own infrastructure with complete privacy. No data leaves your environment unless you configure it to.',
+    badge: 'Privacy'
+  },
+  {
+    icon: 'puzzle',
+    title: 'MCP Server Integration',
+    description: 'Built-in support for Model Context Protocol (MCP) servers. Integrate with GitHub, file systems, databases, and custom tools seamlessly.',
+    badge: 'Flexible'
+  },
+  {
+    icon: 'terminal',
+    title: 'Powerful CLI & Desktop App',
+    description: 'Full-featured command-line interface and cross-platform desktop application. Work the way you want - terminal or GUI.',
+    badge: 'UI/UX'
+  },
+  {
+    icon: 'code',
+    title: 'Developer-First Design',
+    description: 'Clean Go codebase, comprehensive APIs, extensive documentation, and real-world examples. Built by developers, for developers.',
+    badge: 'DX'
+  },
+  {
+    icon: 'workflow',
+    title: 'Advanced Agent Capabilities',
+    description: 'Multi-step reasoning, tool use, web browsing via browser relay, image generation, file operations, and code execution. Agents that actually get work done.',
+    badge: 'Automation'
+  },
+  {
+    icon: 'database',
+    title: 'Persistent Context & Memory',
+    description: 'Conversations and context persist across sessions. Built-in memory systems keep your agents informed and contextually aware.',
+    badge: 'Memory'
+  },
+  {
+    icon: 'image',
+    title: 'Image Generation Built-In',
+    description: 'Generate and edit images with Stable Diffusion and SDXL. Text-to-image and image-to-image capabilities included out of the box.',
+    badge: 'Media'
+  },
+  {
+    icon: 'git-branch',
+    title: 'Fully Open Source',
+    description: 'MIT license. Fork it, modify it, contribute back. Built in Go with a focus on performance, reliability, and extensibility.',
+    badge: 'Freedom'
+  }
+];
+---
+
+<PageLayout
+  title="Features - OpenClaw CE"
+  description="Discover the powerful features that make OpenClaw CE the ultimate platform for building AI agents"
+>
+  <Container>
+    <Section>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Badge pill class="mb-4">Feature Overview</Badge>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Everything You Need to Build <span class="text-brand-500">Intelligent Agents</span>
+        </h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+          OpenClaw CE provides a comprehensive platform for developing, deploying, and managing AI agents.
+          Built with flexibility and developer experience in mind.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((feature) => (
+          <Card class="h-full hover:shadow-lg transition-shadow">
+            <div class="flex items-start gap-4">
+              <div class="p-3 rounded-lg bg-brand-500/10 text-brand-500">
+                <Icon name={feature.icon} size="lg" />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <h3 class="text-xl font-semibold">{feature.title}</h3>
+                  <Badge size="sm" variant="outline">{feature.badge}</Badge>
+                </div>
+                <p class="text-neutral-600 dark:text-neutral-400">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <div class="mt-16 p-8 bg-gradient-to-r from-brand-500/10 to-brand-600/10 rounded-2xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-6">
+            Download OpenClaw CE and start building intelligent agents today.
+          </p>
+          <div class="flex gap-4 justify-center flex-wrap">
+            <a
+              href="/downloads"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-brand-500 text-white rounded-lg hover:bg-brand-600 transition-colors font-semibold"
+            >
+              Download Now
+              <Icon name="download" size="sm" />
+            </a>
+            <a
+              href="/docs"
+              class="inline-flex items-center gap-2 px-6 py-3 border-2 border-brand-500 text-brand-500 rounded-lg hover:bg-brand-50 dark:hover:bg-brand-950 transition-colors font-semibold"
+            >
+              Read Documentation
+              <Icon name="book-open" size="sm" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

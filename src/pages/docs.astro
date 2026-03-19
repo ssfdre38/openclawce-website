@@ -1,0 +1,198 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+
+const docSections = [
+  {
+    title: 'Getting Started',
+    icon: 'rocket',
+    color: 'blue',
+    links: [
+      { title: 'Quick Start Guide', href: '/docs/quick-start' },
+      { title: 'Multi-Provider Setup', href: '/docs/multi-provider' },
+      { title: 'Ollama Integration', href: '/docs/ollama' },
+    ]
+  },
+  {
+    title: 'Advanced Features',
+    icon: 'zap',
+    color: 'purple',
+    links: [
+      { title: 'MCP Servers', href: '/docs/mcp-servers' },
+      { title: 'Browser Relay', href: '/docs/browser-relay' },
+      { title: 'Image Generation', href: '/docs/image-generation' },
+    ]
+  },
+  {
+    title: 'Core Concepts',
+    icon: 'book-open',
+    color: 'green',
+    links: [
+      { title: 'Multi-Tier Routing', href: '/docs/routing' },
+      { title: 'Memory Systems', href: '/docs/memory' },
+      { title: 'Tool Integration', href: '/docs/tools' },
+    ]
+  },
+  {
+    title: 'AI Providers',
+    icon: 'cpu',
+    color: 'orange',
+    links: [
+      { title: 'OpenAI', href: '/docs/providers/openai' },
+      { title: 'Anthropic Claude', href: '/docs/providers/anthropic' },
+      { title: 'Google Gemini', href: '/docs/providers/gemini' },
+      { title: 'Ollama (Local)', href: '/docs/ollama' },
+    ]
+  },
+  {
+    title: 'Development',
+    icon: 'code',
+    color: 'yellow',
+    links: [
+      { title: 'CLI Commands', href: '/docs/cli' },
+      { title: 'Desktop UI', href: '/docs/desktop-ui' },
+      { title: 'Building MCP Servers', href: '/docs/building-mcp' },
+      { title: 'API Reference', href: '/docs/api' },
+    ]
+  },
+  {
+    title: 'Deployment',
+    icon: 'server',
+    color: 'red',
+    links: [
+      { title: 'Building from Source', href: '/docs/build' },
+      { title: 'Docker Deployment', href: '/docs/docker' },
+      { title: 'Configuration Files', href: '/docs/configuration' },
+      { title: 'Security', href: '/docs/security' },
+    ]
+  },
+];
+---
+
+<PageLayout
+  title="Documentation - OpenClaw CE"
+  description="Complete documentation for OpenClaw Community Edition - guides, tutorials, and API reference"
+>
+  <Container>
+    <Section>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Badge pill class="mb-4">Documentation</Badge>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Learn <span class="text-brand-500">OpenClaw CE</span>
+        </h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+          Everything you need to build, deploy, and manage AI agents with OpenClaw Community Edition.
+        </p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="max-w-2xl mx-auto mb-12">
+        <div class="relative">
+          <Icon name="search" size="sm" class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400" />
+          <input
+            type="text"
+            placeholder="Search documentation..."
+            class="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-neutral-200 dark:border-neutral-700 focus:border-brand-500 focus:outline-none bg-white dark:bg-neutral-800"
+          />
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+        <Card class="text-center hover:shadow-lg transition-shadow cursor-pointer">
+          <a href="/docs/quick-start" class="block p-6">
+            <div class="inline-flex p-4 rounded-full bg-green-500/10 text-green-500 mb-4">
+              <Icon name="rocket" size="xl" />
+            </div>
+            <h3 class="text-xl font-bold mb-2">Quick Start</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              Get up and running in 5 minutes
+            </p>
+          </a>
+        </Card>
+
+        <Card class="text-center hover:shadow-lg transition-shadow cursor-pointer">
+          <a href="/docs/ollama" class="block p-6">
+            <div class="inline-flex p-4 rounded-full bg-blue-500/10 text-blue-500 mb-4">
+              <Icon name="cpu" size="xl" />
+            </div>
+            <h3 class="text-xl font-bold mb-2">Ollama Setup</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              Free local AI models
+            </p>
+          </a>
+        </Card>
+
+        <Card class="text-center hover:shadow-lg transition-shadow cursor-pointer">
+          <a href="/docs/mcp-servers" class="block p-6">
+            <div class="inline-flex p-4 rounded-full bg-purple-500/10 text-purple-500 mb-4">
+              <Icon name="layers" size="xl" />
+            </div>
+            <h3 class="text-xl font-bold mb-2">MCP Servers</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              Extend with GitHub, filesystem, and more
+            </p>
+          </a>
+        </Card>
+      </div>
+
+      <!-- Documentation Sections -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {docSections.map((section) => (
+          <Card class="hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class={`p-2 rounded-lg bg-${section.color}-500/10 text-${section.color}-500`}>
+                  <Icon name={section.icon} size="lg" />
+                </div>
+                <h3 class="text-xl font-bold">{section.title}</h3>
+              </div>
+              <ul class="space-y-2">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-brand-500 transition-colors"
+                    >
+                      <Icon name="arrow-right" size="sm" />
+                      <span>{link.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <!-- Community Resources -->
+      <div class="mt-16 p-8 bg-gradient-to-r from-brand-500/10 to-brand-600/10 rounded-2xl">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-4">Need Help?</h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-6">
+            Join our community to get support, share ideas, and contribute to OpenClaw CE.
+          </p>
+          <div class="flex gap-4 justify-center flex-wrap">
+            <Button href="/community" variant="outline">
+              <Icon name="users" size="sm" />
+              Join Community
+            </Button>
+            <Button href="https://github.com/ssfdre38/openclaw-community-edition/discussions" target="_blank" variant="outline">
+              <Icon name="message-circle" size="sm" />
+              Discussions
+            </Button>
+            <Button href="https://github.com/ssfdre38/openclaw-community-edition/issues" target="_blank" variant="outline">
+              <Icon name="bug" size="sm" />
+              Report Issue
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

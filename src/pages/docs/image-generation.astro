@@ -1,0 +1,236 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+---
+
+<PageLayout
+  title="Image Generation - OpenClaw CE"
+  description="Generate and edit images with Stable Diffusion and SDXL"
+>
+  <Container>
+    <Section>
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <Badge pill class="mb-4">Advanced Features</Badge>
+          <h1 class="text-4xl font-bold mb-4">Image Generation</h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            Create and edit images using AI with built-in Stable Diffusion support.
+          </p>
+        </div>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Overview</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              OpenClaw CE includes integrated image generation capabilities using Stable Diffusion:
+            </p>
+            <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Text-to-Image:</strong> Generate images from text descriptions</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Image-to-Image:</strong> Edit existing images with AI</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Two Models:</strong> SD 1.5 (fast) and SDXL (high quality)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Self-Hosted:</strong> Runs locally on your machine</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Web UI:</strong> Includes beautiful web interface</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Setup</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">1. Install Dependencies</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                # Install Python 3.10+ if needed<br/>
+                # Then install image generation server:<br/><br/>
+                cd image-generation<br/>
+                python -m venv venv<br/>
+                source venv/bin/activate  # On Windows: venv\Scripts\activate<br/>
+                pip install -r requirements.txt
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">2. Download Models</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                # Models will download automatically on first run<br/>
+                # SD 1.5: ~4GB, SDXL: ~6.5GB<br/>
+                # Or manually download to models/ directory
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">3. Start Image Server</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                python image_server.py
+              </code>
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Server starts on http://localhost:7860
+            </p>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Configuration</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Add to OpenClaw CE <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">config.yaml</code>:
+            </p>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+              <code>
+                image_generation:<br/>
+                &nbsp;&nbsp;enabled: true<br/>
+                &nbsp;&nbsp;endpoint: http://localhost:7860<br/>
+                &nbsp;&nbsp;default_model: sd15  # or sdxl<br/>
+                &nbsp;&nbsp;default_steps: 20<br/>
+                &nbsp;&nbsp;default_size: 512  # or 1024 for SDXL
+              </code>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Usage in Conversations</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">Text-to-Image</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <p class="text-sm font-semibold mb-2">Simple generation:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm">
+                  <code>You: Generate an image of a sunset over mountains</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">With specific model:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm">
+                  <code>You: Use SDXL to create a photorealistic portrait</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">With parameters:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm">
+                  <code>You: Generate a 1024x1024 image of a futuristic city with SDXL, 30 steps</code>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Image-to-Image</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm font-semibold mb-2">Edit an image:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm">
+                  <code>You: Take this image and make the sky purple</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">Style transfer:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm">
+                  <code>You: Convert this photo to look like an oil painting</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Model Comparison</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-3">SD 1.5 (Fast)</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>⚡ Speed: 5-10 minutes (CPU)</li>
+                  <li>📐 Best size: 512x512</li>
+                  <li>✨ Quality: Good</li>
+                  <li>💾 Size: 4 GB</li>
+                  <li>🎯 Use for: Quick iterations</li>
+                </ul>
+              </div>
+
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-3">SDXL (Best Quality)</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>⚡ Speed: 15-25 minutes (CPU)</li>
+                  <li>📐 Best size: 1024x1024</li>
+                  <li>✨ Quality: Excellent</li>
+                  <li>💾 Size: 6.5 GB</li>
+                  <li>🎯 Use for: Final production images</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Web Interface</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Access the standalone web UI at: <a href="http://localhost:7860" class="text-brand-500 hover:underline">http://localhost:7860</a>
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Features:</h3>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li>✓ Model selector (SD 1.5 or SDXL)</li>
+              <li>✓ Size presets (256px to 1024px)</li>
+              <li>✓ Negative prompts</li>
+              <li>✓ Steps and guidance control</li>
+              <li>✓ Image upload for editing</li>
+              <li>✓ Strength slider for img2img</li>
+              <li>✓ Generation time estimates</li>
+              <li>✓ Image history</li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Performance Tips</h2>
+            
+            <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>GPU Recommended:</strong> Image generation is 100x faster with a GPU (NVIDIA, AMD, or Apple Silicon)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>CPU Mode:</strong> Works but slow. Use SD 1.5 for faster results. Lower steps (10-15) for testing.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Memory:</strong> Needs 4-8GB RAM. Close other apps if you hit memory limits.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Quality vs Speed:</strong> Use SD 1.5 for iteration, SDXL for final images.</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

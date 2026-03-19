@@ -1,0 +1,28 @@
+---
+/**
+ * Community Edition Banner
+ * Displays at the top of every page to clarify this is the CE fork
+ */
+---
+
+<div class="bg-brand-500 text-white py-2.5 px-4 text-center text-sm fixed top-0 left-0 right-0 z-[100] shadow-md">
+  <p class="max-w-7xl mx-auto">
+    This is <strong>OpenClaw Community Edition</strong> — a community-driven fork. 
+    <span class="hidden sm:inline">Visit the official OpenClaw at</span>
+    <a 
+      href="https://openclaw.ai" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="underline font-semibold hover:text-white/90 transition-colors ml-1"
+    >
+      openclaw.ai
+    </a>
+  </p>
+</div>
+
+<style>
+  /* Push the header down to make room for the banner */
+  :global(header) {
+    margin-top: 2.75rem !important;
+  }
+</style>

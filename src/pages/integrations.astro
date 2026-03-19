@@ -1,0 +1,230 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+
+const integrationCategories = [
+  {
+    title: 'Chat Platforms',
+    description: 'Message OpenClaw from your favorite chat apps',
+    icon: 'message-circle',
+    color: 'blue',
+    integrations: [
+      { name: 'Discord', desc: 'Full bot support with slash commands', supported: true },
+      { name: 'Telegram', desc: 'Inline bots and group support', supported: true },
+      { name: 'WhatsApp', desc: 'Chat via WhatsApp Business API', supported: true },
+      { name: 'Slack', desc: 'Workspace bots and slash commands', supported: true },
+      { name: 'Signal', desc: 'Private, encrypted messaging', supported: true },
+      { name: 'Matrix', desc: 'Decentralized, federated chat', supported: true },
+      { name: 'IRC', desc: 'Classic IRC protocol support', supported: true },
+      { name: 'iMessage', desc: 'Apple Messages integration', supported: true },
+      { name: 'BlueBubbles', desc: 'iMessage bridge for Android', supported: true },
+      { name: 'Google Chat', desc: 'Google Workspace integration', supported: true },
+      { name: 'Microsoft Teams', desc: 'Enterprise chat and collaboration', supported: true },
+      { name: 'Mattermost', desc: 'Open-source team communication', supported: true },
+      { name: 'Twitch', desc: 'Live streaming chat integration', supported: true },
+      { name: 'Feishu/Lark', desc: 'ByteDance workspace platform', supported: true },
+      { name: 'LINE', desc: 'Popular Asian messaging app', supported: true },
+      { name: 'Zalo', desc: 'Vietnamese chat platform', supported: true },
+      { name: 'Nextcloud Talk', desc: 'Self-hosted collaboration', supported: true },
+      { name: 'Synology Chat', desc: 'NAS-based messaging', supported: true },
+      { name: 'Nostr', desc: 'Decentralized protocol', supported: true },
+      { name: 'Tlon/Urbit', desc: 'P2P messaging platform', supported: true },
+    ],
+  },
+  {
+    title: 'AI Models',
+    description: 'Use any AI model - cloud or local',
+    icon: 'cpu',
+    color: 'purple',
+    integrations: [
+      { name: 'OpenAI', desc: 'GPT-4, GPT-3.5, and all variants', supported: true },
+      { name: 'Anthropic Claude', desc: 'Claude 3 Opus, Sonnet, Haiku', supported: true },
+      { name: 'Google Gemini', desc: 'Gemini Pro and Ultra models', supported: true },
+      { name: 'Ollama', desc: 'Run Llama, Mistral, and more locally', supported: true },
+      { name: 'Amazon Bedrock', desc: 'AWS-hosted AI models', supported: true },
+      { name: 'Minimax', desc: 'Chinese AI model provider', supported: true },
+      { name: 'Qwen', desc: 'Alibaba\'s Qwen models', supported: true },
+      { name: 'Node-llama-cpp', desc: 'Run GGUF models locally', supported: true },
+    ],
+  },
+  {
+    title: 'Developer Tools',
+    description: 'Code, Git, and development integrations',
+    icon: 'code',
+    color: 'green',
+    integrations: [
+      { name: 'GitHub MCP', desc: 'Issues, PRs, repos, code search', supported: true },
+      { name: 'Filesystem MCP', desc: 'Read/write local files', supported: true },
+      { name: 'Git MCP', desc: 'Version control operations', supported: true },
+      { name: 'GitHub Copilot', desc: 'AI code completions (via proxy)', supported: true },
+      { name: 'Database MCP', desc: 'Query and manage databases', supported: true },
+      { name: 'Custom MCP Servers', desc: 'Build your own integrations', supported: true },
+    ],
+  },
+  {
+    title: 'Media & Creative',
+    description: 'Images, GIFs, and creative tools',
+    icon: 'image',
+    color: 'pink',
+    integrations: [
+      { name: 'Stable Diffusion', desc: 'Text-to-image generation (SD 1.5)', supported: true },
+      { name: 'SDXL', desc: 'High-quality image generation', supported: true },
+      { name: 'Image-to-Image', desc: 'Transform existing images', supported: true },
+      { name: 'Browser Relay', desc: 'Real-time web browsing and screenshots', supported: true },
+      { name: 'GIF Search', desc: 'Find the perfect reaction GIF', supported: false },
+    ],
+  },
+  {
+    title: 'Voice & Audio',
+    description: 'Voice calls and audio processing',
+    icon: 'mic',
+    color: 'orange',
+    integrations: [
+      { name: 'Voice Calls', desc: 'Make and receive voice calls', supported: true },
+      { name: 'Talk Voice', desc: 'Voice-to-text and text-to-voice', supported: true },
+      { name: 'Phone Control', desc: 'Telephony and call management', supported: true },
+      { name: 'Edge TTS', desc: 'Text-to-speech synthesis', supported: true },
+    ],
+  },
+  {
+    title: 'Productivity & Tools',
+    description: 'Automation and workflow integrations',
+    icon: 'briefcase',
+    color: 'cyan',
+    integrations: [
+      { name: 'Memory (Core)', desc: 'RAG-based long-term memory', supported: true },
+      { name: 'Memory (LanceDB)', desc: 'Vector database memory', supported: true },
+      { name: 'Device Pairing', desc: 'Multi-device sync via QR codes', supported: true },
+      { name: 'OpenTelemetry', desc: 'Observability and diagnostics', supported: true },
+      { name: 'Diff Tools', desc: 'Code and text comparison', supported: true },
+      { name: 'Custom Skills', desc: 'Build and share capabilities', supported: true },
+    ],
+  },
+  {
+    title: 'Platforms',
+    description: 'Run OpenClaw anywhere',
+    icon: 'monitor',
+    color: 'indigo',
+    integrations: [
+      { name: 'Windows', desc: 'Native Windows support', supported: true },
+      { name: 'macOS', desc: 'Native macOS app', supported: true },
+      { name: 'Linux', desc: 'All major distributions', supported: true },
+      { name: 'Docker', desc: 'Containerized deployment', supported: true },
+      { name: 'Docker Compose', desc: 'Multi-container orchestration', supported: true },
+      { name: 'Web Browser', desc: 'Browser-based interface', supported: true },
+      { name: 'CLI', desc: 'Command-line interface', supported: true },
+    ],
+  },
+];
+
+const stats = [
+  { value: '40+', label: 'Chat Platforms' },
+  { value: '8+', label: 'AI Providers' },
+  { value: '100%', label: 'Open Source' },
+];
+---
+
+<PageLayout
+  title="Integrations - OpenClaw CE"
+  description="50+ integrations with the apps and services you already use. Chat from your phone, control from your desktop, automate everything."
+>
+  <Container>
+    <Section>
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Badge pill class="mb-4">50+ Integrations</Badge>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Works With <span class="text-brand-500">Everything</span>
+        </h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
+          Connect OpenClaw CE to the apps and services you already use. Chat from Discord, automate with GitHub, generate images with Stable Diffusion - all from one platform.
+        </p>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+          {stats.map((stat) => (
+            <div class="text-center">
+              <div class="text-3xl font-bold text-brand-500">{stat.value}</div>
+              <div class="text-sm text-neutral-500 dark:text-neutral-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Integration Categories -->
+      {integrationCategories.map((category, idx) => (
+        <div class="mb-16">
+          <div class="flex items-center gap-3 mb-6">
+            <div class={`p-3 rounded-lg bg-${category.color}-500/10 text-${category.color}-500`}>
+              <Icon name={category.icon} size="xl" />
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold">{category.title}</h2>
+              <p class="text-neutral-600 dark:text-neutral-400">{category.description}</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {category.integrations.map((integration) => (
+              <Card class={`p-4 ${integration.supported ? 'border-neutral-200 dark:border-neutral-700' : 'border-neutral-300 dark:border-neutral-800 opacity-60'}`}>
+                <div class="flex items-start justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <h3 class="font-semibold">{integration.name}</h3>
+                      {integration.supported && (
+                        <Icon name="check-circle" size="sm" class="text-green-500" />
+                      )}
+                    </div>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">{integration.desc}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- CTA -->
+      <Card class="mt-16 bg-gradient-to-br from-brand-500/5 to-purple-500/5 border-brand-500/20">
+        <div class="p-12 text-center">
+          <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+            Install OpenClaw CE and connect your first integration in minutes. Free, open source, and ready for production.
+          </p>
+          <div class="flex gap-4 justify-center">
+            <Button size="lg" href="/downloads">
+              <Icon name="download" size="sm" />
+              Download Now
+            </Button>
+            <Button size="lg" variant="outline" href="/docs/quick-start">
+              <Icon name="book-open" size="sm" />
+              Quick Start Guide
+            </Button>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Community Note -->
+      <div class="mt-12 p-6 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+        <div class="flex items-start gap-3">
+          <Icon name="info" class="text-blue-500 mt-1 flex-shrink-0" />
+          <div>
+            <h3 class="font-bold text-blue-600 dark:text-blue-400 mb-2">Want More Capabilities?</h3>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-3">
+              OpenClaw CE supports custom MCP servers and skills. Build your own integrations or discover community-built extensions.
+            </p>
+            <Button variant="ghost" size="sm" href="https://github.com/ssfdre38/openclaw-community-edition" target="_blank">
+              <Icon name="github" size="sm" />
+              Explore on GitHub
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

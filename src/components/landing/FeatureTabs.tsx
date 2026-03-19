@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Palette, Search, Zap, LayoutGrid, Globe, Copy, Check, Newspaper } from 'lucide-react';
+import { Cpu, Layers, Globe, Image, Zap, Settings, Copy, Check } from 'lucide-react';
 import { VerticalTabs, type VerticalTab } from '@/components/ui/overlay/VerticalTabs';
 
 interface TabContent {
@@ -8,200 +8,204 @@ interface TabContent {
 }
 
 const tabContent: Record<string, TabContent> = {
-  theming: {
-    title: 'Design Tokens & Dark Mode',
+  providers: {
+    title: 'Multi-Provider Configuration',
     content:
-      "Complete design system using Tailwind v4's CSS-first configuration with built-in dark mode. Semantic color tokens, system preference detection, and localStorage persistence.",
+      "Use OpenAI, Anthropic, Google Gemini, or Ollama - all from one config. Switch providers on the fly or use automatic routing based on task complexity.",
   },
-  seo: {
-    title: 'Automated SEO Handling',
+  ollama: {
+    title: 'Free Local AI with Ollama',
     content:
-      'Strictly typed metadata injection for every page with automatic OG image generation. Includes sitemap, robots.txt, and JSON-LD structured data.',
+      'Run powerful AI models locally with zero API costs. Privacy-first, offline-capable, and perfect for development or sensitive data.',
   },
-  perf: {
-    title: 'Zero JS by Default',
+  mcp: {
+    title: 'MCP Server Integration + Custom Servers',
     content:
-      "Astro's island architecture ensures your pages ship 0kb of JavaScript unless explicitly interactive. Optimized for Core Web Vitals.",
+      'Connect to GitHub, filesystem, databases with standard MCP servers. OpenClaw CE includes custom Discord MCP server with emoji/sticker tools - more coming soon!',
   },
-  components: {
-    title: 'Type-Safe Components',
+  browser: {
+    title: 'Built-in Web Browsing',
     content:
-      'TypeScript-first UI primitives with full prop validation and IDE autocompletion. Includes buttons, inputs, cards, modals, and more.',
+      "Access real-time information from the web with built-in browser relay. Fetches pages, parses content, and stays current.",
   },
-  i18n: {
-    title: 'i18n Ready',
+  images: {
+    title: 'Image Generation',
     content:
-      'Add multi-language support with the --i18n flag. Includes type-safe translations, automatic locale detection, and SEO-friendly URL structures.',
+      'Generate and edit images with Stable Diffusion and SDXL. Text-to-image and image-to-image, all running locally.',
   },
-  content: {
-    title: 'Content & Search',
+  routing: {
+    title: 'Smart Model Routing',
     content:
-      'Type-safe content collections with Zod schemas, MDX support, RSS feeds, and Pagefind integration for lightning-fast static search.',
+      'Automatically route simple queries to fast models and complex tasks to powerful models. Save money while maintaining quality.',
   },
 };
 
 const codeExamples: Record<
   string,
-  { code: string; filename: string; lang: 'css' | 'astro' | 'typescript' | 'javascript' }
+  { code: string; filename: string; lang: 'yaml' | 'bash' | 'typescript' }
 > = {
-  theming: {
-    lang: 'css',
-    code: `/* src/styles/themes/default.css — swap this file to re-theme */
-:root {
-  /* Semantic Tokens - Light Mode */
-  --background: var(--gray-0);
-  --foreground: var(--gray-900);
-  --border: var(--gray-200);
-  --primary: var(--gray-900);
-  --primary-foreground: var(--gray-0);
-  --accent: var(--brand-500);
-  --card: var(--gray-0);
-  --ring: var(--gray-900);
-}
+  providers: {
+    lang: 'yaml',
+    code: `# ~/.openclaw/config.yaml
+providers:
+  # OpenAI - Best for coding
+  - name: openai
+    type: openai
+    api_key: sk-your-key-here
+    models:
+      - gpt-4-turbo-preview
+      - gpt-3.5-turbo
 
-/* Dark Mode */
-.dark {
-  --background: var(--gray-950);
-  --foreground: var(--gray-50);
-  --border: var(--gray-800);
-  --primary: var(--gray-0);
-  --primary-foreground: var(--gray-900);
-}`,
-    filename: 'src/styles/themes/default.css',
+  # Anthropic - Best for writing
+  - name: anthropic
+    type: anthropic
+    api_key: sk-ant-your-key-here
+    models:
+      - claude-3-5-sonnet-20241022
+      - claude-3-haiku-20240307
+
+  # Ollama - Free local models
+  - name: ollama
+    type: ollama
+    endpoint: http://localhost:11434
+    models:
+      - llama3.2:latest
+      - qwen2.5-coder:7b
+
+default_provider: ollama
+default_model: llama3.2:latest`,
+    filename: '~/.openclaw/config.yaml',
   },
-  seo: {
-    lang: 'astro',
-    code: `---
-// src/components/seo/SEO.astro
-import siteConfig from '@/config/site.config';
+  ollama: {
+    lang: 'bash',
+    code: `# Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
 
-interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-}
+# Pull your first model (4.7GB)
+ollama pull llama3.2
 
-const { title, description, image } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+# Or get the coding specialist (4.7GB)
+ollama pull qwen2.5-coder:7b
 
-// Auto-generate OG image if none provided
-const ogImage = image || \`/og/\${Astro.url.pathname}.png\`;
----
+# Start using it
+./openclaw chat --model ollama:llama3.2:latest
 
-<title>{title}</title>
-<meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL.toString()} />
-<meta property="og:title" content={title} />
-<meta property="og:image" content={ogImage} />`,
-    filename: 'src/components/seo/SEO.astro',
+# List all available models
+ollama list
+
+# Models are cached locally at ~/.ollama/models
+# No internet needed after download!`,
+    filename: 'terminal',
   },
-  perf: {
-    lang: 'astro',
-    code: `---
-// src/pages/index.astro
-import LandingLayout from '@/layouts/LandingLayout.astro';
-import { Hero } from '@/components/hero';
-import { TerminalDemo } from '@/components/ui/marketing/TerminalDemo';
-import FeatureTabs from '@/components/landing/FeatureTabs.tsx';
-import TechStack from '@/components/landing/TechStack.astro';
----
+  mcp: {
+    lang: 'yaml',
+    code: `# ~/.openclaw/config.yaml
+mcp_servers:
+  # OpenClaw CE - Custom Discord MCP Server
+  discord:
+    command: node
+    args:
+      - "/path/to/openclaw-mcp-servers/discord/dist/index.js"
+    env:
+      DISCORD_TOKEN: your_bot_token_here
+      DISCORD_GUILD_IDS: "123456789,987654321"  # comma-separated
+  
+  # GitHub integration
+  github:
+    command: npx
+    args:
+      - "-y"
+      - "@modelcontextprotocol/server-github"
+    env:
+      GITHUB_TOKEN: ghp_your_token_here
 
-<!-- Static Astro components - ships 0kb JS -->
-<Hero layout="split" size="lg">
-  <!-- React component - hydrates immediately -->
-  <TerminalDemo slot="aside" client:load />
-</Hero>
+  # Filesystem access
+  filesystem:
+    command: npx
+    args:
+      - "-y"
+      - "@modelcontextprotocol/server-filesystem"
+      - "/home/user/projects"
 
-<!-- Static HTML, no JS -->
-<TechStack />
-
-<!-- React component - hydrates when scrolled into view -->
-<FeatureTabs client:visible />`,
-    filename: 'src/pages/index.astro',
+# Now ask: "List Discord emojis" or "Search for fire emoji"`,
+    filename: '~/.openclaw/config.yaml',
   },
-  components: {
-    lang: 'typescript',
-    code: `// src/components/ui/form/Button/Button.tsx
-import { type Ref } from 'react';
-import { cn } from '@/lib/cn';
-import { isExternalUrl } from '@/lib/utils';
-import { buttonVariants, type ButtonVariants } from './button.variants';
+  browser: {
+    lang: 'yaml',
+    code: `# ~/.openclaw/config.yaml
+browser_relay:
+  enabled: true
+  endpoint: http://localhost:8080
+  timeout: 30  # seconds
+  max_retries: 3
+  max_content_length: 50000  # characters
 
-interface BaseProps {
-  ref?: Ref<HTMLButtonElement | HTMLAnchorElement>;
-  variant?: ButtonVariants['variant'];
-  size?: ButtonVariants['size'];
-  loading?: boolean;
-  href?: string;
-  children: React.ReactNode;
-}
+# Start the relay
+# ./openclaw relay start
 
-export function Button({ ref, variant = 'primary', size = 'md', href, ...rest }: BaseProps) {
-  const classes = cn(buttonVariants({ variant, size }), rest.className);
-  const isExternal = href ? isExternalUrl(href) : false;
+# Now you can ask:
+# "What's on the Python.org homepage?"
+# "Search for the latest React features"
+# "Compare pricing on these two websites"
 
-  if (href) {
-    return <a ref={ref} href={href} className={classes} target={isExternal ? '_blank' : undefined} />;
-  }
-  return <button ref={ref} className={classes} {...rest} />;
-}`,
-    filename: 'src/components/ui/form/Button/Button.tsx',
+# The AI fetches and reads web pages in real-time`,
+    filename: '~/.openclaw/config.yaml',
   },
-  i18n: {
-    lang: 'typescript',
-    code: `// src/i18n/config.ts (with --i18n flag)
-export const languages = {
-  en: 'English',
-  es: 'Español',
-  fr: 'Français',
-} as const;
+  images: {
+    lang: 'yaml',
+    code: `# ~/.openclaw/config.yaml
+image_generation:
+  enabled: true
+  endpoint: http://localhost:7860
+  default_model: sd15  # or sdxl
+  default_steps: 20
+  default_size: 512  # or 1024 for SDXL
 
-export const defaultLang = 'en';
+# Models available:
+# - SD 1.5 (fast): ~5-10 min on CPU, good quality
+# - SDXL (best): ~15-25 min on CPU, excellent quality
 
-// src/i18n/translations/en.ts
-export default {
-  'nav.home': 'Home',
-  'nav.about': 'About',
-  'hero.title': 'Ship faster with Velocity',
-  'hero.subtitle': 'The modern Astro starter',
-} as const;
-
-// Usage in components
-import { t } from '@/i18n';
-const title = t('hero.title'); // "Ship faster..."`,
-    filename: 'src/i18n/config.ts',
+# Usage:
+# "Generate an image of a sunset over mountains"
+# "Create a 1024x1024 photorealistic portrait with SDXL"
+# "Edit this image to make the sky purple"`,
+    filename: '~/.openclaw/config.yaml',
   },
-  content: {
-    lang: 'typescript',
-    code: `// src/content.config.ts
-import { defineCollection } from 'astro:content';
-import { z } from 'astro/zod';
-import { glob } from 'astro/loaders';
+  routing: {
+    lang: 'yaml',
+    code: `# ~/.openclaw/config.yaml
+routing:
+  enabled: true
+  mode: complexity  # auto-select based on query complexity
 
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string().max(100),
-      description: z.string().max(200),
-      publishedAt: z.coerce.date(),
-      updatedAt: z.coerce.date().optional(),
-      author: z.string().default('Team'),
-      image: image().optional(),
-      tags: z.array(z.string()).default([]),
-      featured: z.boolean().default(false),
-      draft: z.boolean().default(false),
-      locale: z.enum(['en', 'es', 'fr']).default('en'),
-    }),
-});
+  tiers:
+    # Fast tier - simple questions (0-3 complexity)
+    - name: fast
+      complexity_max: 3
+      models:
+        - ollama:phi3:latest        # Free, local
+        - gpt-3.5-turbo             # $0.0005/1K tokens
 
-export const collections = { blog, pages, authors, faqs };
-// + Pagefind indexes all content at build time`,
-    filename: 'src/content.config.ts',
+    # Balanced tier - moderate tasks (4-7 complexity)
+    - name: balanced
+      complexity_max: 7
+      models:
+        - ollama:llama3.2:latest    # Free, local
+        - claude-3-haiku-20240307   # $0.0025/1K tokens
+
+    # Powerful tier - complex reasoning (8-10 complexity)
+    - name: powerful
+      complexity_max: 10
+      models:
+        - claude-3-5-sonnet-20241022  # Best quality
+        - gpt-4-turbo-preview         # OpenAI flagship
+
+# Saves money by using cheaper models for simple tasks!`,
+    filename: '~/.openclaw/config.yaml',
   },
 };
 
-// Simple syntax highlighter
+// Simple syntax highlighter for YAML and bash
 function highlightCode(code: string, lang: string): React.ReactNode[] {
   const lines = code.split('\n');
 
@@ -220,12 +224,12 @@ function highlightCode(code: string, lang: string): React.ReactNode[] {
       }
     };
 
-    // Process the line character by character with regex patterns
+    // Process the line
     while (remaining.length > 0) {
       let matched = false;
 
-      // Comments (// and /* */)
-      const commentMatch = remaining.match(/^(\/\/.*|\/\*[\s\S]*?\*\/)/);
+      // Comments (# for YAML/bash)
+      const commentMatch = remaining.match(/^(#.*)/);
       if (commentMatch) {
         addToken(commentMatch[0], 'text-foreground-muted italic');
         remaining = remaining.slice(commentMatch[0].length);
@@ -233,17 +237,8 @@ function highlightCode(code: string, lang: string): React.ReactNode[] {
         continue;
       }
 
-      // HTML comments
-      const htmlCommentMatch = remaining.match(/^(<!--[\s\S]*?-->)/);
-      if (htmlCommentMatch) {
-        addToken(htmlCommentMatch[0], 'text-foreground-muted italic');
-        remaining = remaining.slice(htmlCommentMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // Strings (single, double, template)
-      const stringMatch = remaining.match(/^(['"`])(?:(?!\1)[^\\]|\\.)*\1/);
+      // Strings (single, double quotes)
+      const stringMatch = remaining.match(/^(['"])(?:(?!\1)[^\\]|\\.)*\1/);
       if (stringMatch) {
         addToken(stringMatch[0], 'text-green-600 dark:text-green-400');
         remaining = remaining.slice(stringMatch[0].length);
@@ -251,48 +246,31 @@ function highlightCode(code: string, lang: string): React.ReactNode[] {
         continue;
       }
 
-      // Astro frontmatter delimiters
-      if (remaining.startsWith('---')) {
-        addToken('---', 'text-purple-600 dark:text-purple-400 font-semibold');
-        remaining = remaining.slice(3);
+      // YAML keys (word followed by colon)
+      const yamlKeyMatch = remaining.match(/^([\w_-]+)(:)/);
+      if (yamlKeyMatch && lang === 'yaml') {
+        addToken(yamlKeyMatch[1], 'text-blue-600 dark:text-blue-400 font-semibold');
+        addToken(yamlKeyMatch[2], 'text-foreground-secondary');
+        remaining = remaining.slice(yamlKeyMatch[0].length);
         matched = true;
         continue;
       }
 
-      // HTML/JSX tags
-      const tagMatch = remaining.match(/^(<\/?[\w-]+|>|\/>)/);
-      if (tagMatch) {
-        addToken(tagMatch[0], 'text-pink-600 dark:text-pink-400');
-        remaining = remaining.slice(tagMatch[0].length);
+      // Bash commands (at start or after &&, ||, |, ;)
+      const bashCmdMatch = remaining.match(/^(ollama|curl|npx|git|cd|chmod|mkdir|rm|ls|cat|echo|export)(\s)/);
+      if (bashCmdMatch && lang === 'bash') {
+        addToken(bashCmdMatch[1], 'text-purple-600 dark:text-purple-400 font-semibold');
+        addToken(bashCmdMatch[2], 'text-foreground-secondary');
+        remaining = remaining.slice(bashCmdMatch[0].length);
         matched = true;
         continue;
       }
 
-      // CSS at-rules (@theme, @import, etc.)
-      const atRuleMatch = remaining.match(/^(@[\w-]+)/);
-      if (atRuleMatch) {
-        addToken(atRuleMatch[0], 'text-purple-600 dark:text-purple-400 font-semibold');
-        remaining = remaining.slice(atRuleMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // Keywords
-      const keywordMatch = remaining.match(
-        /^(const|let|var|function|return|import|export|from|interface|type|class|extends|implements|new|async|await|if|else|for|while|switch|case|break|default|try|catch|finally|throw|typeof|instanceof|in|of|as|readonly|public|private|protected)\b/
-      );
-      if (keywordMatch) {
-        addToken(keywordMatch[0], 'text-purple-600 dark:text-purple-400 font-semibold');
-        remaining = remaining.slice(keywordMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // Boolean/null
-      const boolMatch = remaining.match(/^(true|false|null|undefined)\b/);
-      if (boolMatch) {
-        addToken(boolMatch[0], 'text-orange-700 dark:text-orange-300');
-        remaining = remaining.slice(boolMatch[0].length);
+      // URLs and paths
+      const urlMatch = remaining.match(/^(https?:\/\/[^\s]+|\/[^\s]*|~\/[^\s]*)/);
+      if (urlMatch) {
+        addToken(urlMatch[0], 'text-cyan-600 dark:text-cyan-400');
+        remaining = remaining.slice(urlMatch[0].length);
         matched = true;
         continue;
       }
@@ -306,44 +284,11 @@ function highlightCode(code: string, lang: string): React.ReactNode[] {
         continue;
       }
 
-      // CSS properties (word followed by colon)
-      const cssPropMatch = remaining.match(/^([\w-]+)(:)/);
-      if (cssPropMatch && (lang === 'css' || line.includes('{'))) {
-        addToken(cssPropMatch[1], 'text-blue-600 dark:text-blue-400');
-        addToken(cssPropMatch[2], 'text-foreground-secondary');
-        remaining = remaining.slice(cssPropMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // CSS functions (var, oklch, etc.)
-      const cssFuncMatch = remaining.match(
-        /^(var|oklch|rgb|rgba|hsl|hsla|calc|url|clamp|min|max)(\()/
-      );
-      if (cssFuncMatch) {
-        addToken(cssFuncMatch[1], 'text-amber-700 dark:text-amber-300');
-        addToken(cssFuncMatch[2], 'text-foreground-secondary');
-        remaining = remaining.slice(cssFuncMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // Function calls
-      const funcMatch = remaining.match(/^([\w]+)(\()/);
-      if (funcMatch) {
-        addToken(funcMatch[1], 'text-amber-700 dark:text-amber-300');
-        addToken(funcMatch[2], 'text-foreground-secondary');
-        remaining = remaining.slice(funcMatch[0].length);
-        matched = true;
-        continue;
-      }
-
-      // Type annotations after colon
-      const typeMatch = remaining.match(/^(:\s*)([\w<>[\]|&]+)/);
-      if (typeMatch) {
-        addToken(typeMatch[1], 'text-foreground-secondary');
-        addToken(typeMatch[2], 'text-cyan-700 dark:text-cyan-300');
-        remaining = remaining.slice(typeMatch[0].length);
+      // Boolean/null values
+      const boolMatch = remaining.match(/^(true|false|null|yes|no)\b/);
+      if (boolMatch) {
+        addToken(boolMatch[0], 'text-orange-700 dark:text-orange-300 font-semibold');
+        remaining = remaining.slice(boolMatch[0].length);
         matched = true;
         continue;
       }
@@ -420,56 +365,29 @@ function CodeBlock({ code, filename, lang }: { code: string; filename: string; l
 
 // Tab definitions with icons for VerticalTabs
 const tabs: VerticalTab[] = [
-  { id: 'theming', label: 'Theming', description: 'Design tokens & dark mode', icon: Palette },
-  { id: 'seo', label: 'SEO & Meta', description: 'OG images & structured data', icon: Search },
-  { id: 'perf', label: 'Performance', description: 'Zero JS by default', icon: Zap },
-  {
-    id: 'components',
-    label: 'Components',
-    description: 'Type-safe UI primitives',
-    icon: LayoutGrid,
-  },
-  { id: 'i18n', label: 'i18n Ready', description: 'Optional multi-language', icon: Globe },
-  { id: 'content', label: 'Content', description: 'Blog, MDX & search', icon: Newspaper },
+  { id: 'providers', label: 'Multi-Provider', description: 'OpenAI, Claude, Ollama, Gemini', icon: Cpu },
+  { id: 'ollama', label: 'Ollama (Local AI)', description: 'Free, offline-capable', icon: Settings },
+  { id: 'mcp', label: 'MCP Servers', description: 'GitHub, filesystem, tools', icon: Layers },
+  { id: 'browser', label: 'Web Browsing', description: 'Real-time information', icon: Globe },
+  { id: 'images', label: 'Image Generation', description: 'SD + SDXL support', icon: Image },
+  { id: 'routing', label: 'Smart Routing', description: 'Complexity-based selection', icon: Zap },
 ];
 
 export function FeatureTabs() {
-  const [activeTab, setActiveTab] = useState('theming');
+  const [activeTab, setActiveTab] = useState('providers');
 
   return (
     <section id="features" className="bg-background relative overflow-hidden py-[var(--space-section)]">
-      {/* Decorative logomark watermark */}
-      <div
-        className="pointer-events-none absolute -top-8 right-8 hidden h-[28rem] w-[28rem] opacity-[0.04] grayscale md:block lg:top-10 lg:right-24 lg:h-[44rem] lg:w-[44rem] dark:opacity-[0.06]"
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 90 101" fill="none" className="h-full w-full">
-          <path
-            d="M35.1288 23.8398L45.1667 49.4151L56.2482 23.8398H87.1082C86.5647 23.3764 85.9776 22.9637 85.3616 22.5944L48.6165 0.704798C46.377 -0.0699896 43.4273 -0.439281 41.2675 0.842377L3.36286 23.3692C3.13819 23.5067 2.92801 23.666 2.72508 23.8326H35.1288V23.8398Z"
-            fill="currentColor"
-          />
-          <path
-            d="M0.144951 28.8578C0.079723 29.2851 0.0434853 29.7123 0.0434853 30.1323L0 72.036C0 76.1778 1.95684 78.3936 5.26172 80.3631L39.4919 100.703L0.144951 28.8578Z"
-            fill="currentColor"
-          />
-          <path
-            d="M89.9203 28.7058L50.0588 101L86.6661 79.1539C88.7027 77.9374 90 75.0265 90 72.6442L89.9783 29.6037C89.9783 29.2923 89.9493 28.9954 89.913 28.6985L89.9203 28.7058Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-
       <div className="relative mx-auto max-w-6xl px-6">
         {/* Header */}
         <div className="mb-[var(--space-section-header)]">
           <h2 className="font-display text-foreground text-3xl font-bold md:text-4xl">
-            Everything you need.
+            Configure once.
             <br />
-            <span className="text-brand-500">Nothing you don't.</span>
+            <span className="text-brand-500">Use everywhere.</span>
           </h2>
           <p className="text-foreground-muted mt-4 max-w-2xl text-lg">
-            We stripped away the bloat and kept the primitives that actually speed up development
-            for agencies and freelancers.
+            Simple YAML configuration gives you access to multiple AI providers, powerful tools, and advanced features.
           </p>
         </div>
 

@@ -49,29 +49,15 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  name: 'Velocity',
-  description: 'A modern website built with Astro and Tailwind CSS',
-  url: SITE_URL || 'https://example.com',
+  name: 'OpenClaw CE',
+  description: 'OpenClaw Community Edition - Open Source AI Agent Platform for developers building intelligent automation solutions',
+  url: SITE_URL || 'https://openclawce.com',
   ogImage: '/og-default.png',
-  author: 'Southwell Media',
-  // Demo contact info - replace with your actual business details
-  email: 'hello@example.com',
-  phone: '+1 (555) 123-4567',
-  address: {
-    street: '123 Main St',
-    city: 'Dallas',
-    state: 'TX',
-    zip: '75001',
-    country: 'US',
-  },
+  author: 'OpenClaw CE',
+  email: 'hello@openclawce.com',
   socialLinks: [
-    'https://github.com/southwellmedia',
+    'https://github.com/ssfdre38/openclaw-community-edition',
   ],
-  // Twitter metadata - update with your actual handles or remove
-  // twitter: {
-  //   site: '@yourhandle',
-  //   creator: '@yourhandle',
-  // },
   verification: {
     google: GOOGLE_SITE_VERIFICATION,
     bing: BING_SITE_VERIFICATION,
@@ -80,13 +66,13 @@ const siteConfig: SiteConfig = {
   // Replace the SVG files there with your own branding
   branding: {
     logo: {
-      alt: 'Velocity',
+      alt: 'OpenClaw CE - Open Source AI Agent Platform',
     },
     favicon: {
       svg: '/favicon.svg',
     },
     colors: {
-      themeColor: '#F94C10',
+      themeColor: '#3B82F6',
       backgroundColor: '#ffffff',
     },
   },

@@ -1,0 +1,323 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+---
+
+<PageLayout
+  title="MCP Servers - OpenClaw CE"
+  description="Model Context Protocol integration for extensible AI capabilities"
+>
+  <Container>
+    <Section>
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <Badge pill class="mb-4">Integration</Badge>
+          <h1 class="text-4xl font-bold mb-4">MCP Server Integration</h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            Extend OpenClaw CE with Model Context Protocol servers for GitHub, filesystem, databases, and custom tools
+          </p>
+        </div>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">What is MCP?</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              The <strong>Model Context Protocol (MCP)</strong> is an open standard for connecting AI assistants to external data sources and tools. Think of it as a universal adapter that lets your AI:
+            </p>
+            <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Read/write files:</strong> Access your local filesystem</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Query GitHub:</strong> List repos, PRs, issues, commits</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Execute code:</strong> Run scripts and commands</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Access databases:</strong> Query SQL, MongoDB, etc.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Custom tools:</strong> Build your own integrations</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Built-in MCP Servers</h2>
+            
+            <div class="space-y-6">
+              <div class="border-l-4 border-brand-500 pl-4">
+                <h3 class="text-xl font-semibold mb-2">GitHub MCP Server</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-3">
+                  Full GitHub integration - repos, PRs, issues, commits, code search, workflow runs
+                </p>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• List and search repositories</li>
+                  <li>• Create and manage pull requests</li>
+                  <li>• View and comment on issues</li>
+                  <li>• Search code across all of GitHub</li>
+                  <li>• Monitor workflow runs and logs</li>
+                </ul>
+              </div>
+
+              <div class="border-l-4 border-brand-500 pl-4">
+                <h3 class="text-xl font-semibold mb-2">Filesystem MCP Server</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-3">
+                  Read and write files on your local machine
+                </p>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• Read file contents</li>
+                  <li>• Write/update files</li>
+                  <li>• List directories</li>
+                  <li>• Search file contents</li>
+                </ul>
+              </div>
+
+              <div class="border-l-4 border-brand-500 pl-4">
+                <h3 class="text-xl font-semibold mb-2">Web Search MCP Server</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-3">
+                  Search the web and fetch content
+                </p>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• Web search with citations</li>
+                  <li>• Fetch and parse web pages</li>
+                  <li>• Extract structured data</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Configuration</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Add MCP servers to your <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">~/.openclaw/config.yaml</code>:
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">GitHub MCP Server</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                mcp_servers:<br/>
+                &nbsp;&nbsp;github:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;args:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "-y"<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "@modelcontextprotocol/server-github"<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;env:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GITHUB_TOKEN: your-github-personal-access-token
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Filesystem MCP Server</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                mcp_servers:<br/>
+                &nbsp;&nbsp;filesystem:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;args:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "-y"<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "@modelcontextprotocol/server-filesystem"<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "/path/to/allowed/directory"
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Multiple Servers</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+              <code>
+                mcp_servers:<br/>
+                &nbsp;&nbsp;github:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@modelcontextprotocol/server-github"]<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;env:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GITHUB_TOKEN: ghp_xxxxxxxxxxxxx<br/><br/>
+                &nbsp;&nbsp;filesystem:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/projects"]<br/><br/>
+                &nbsp;&nbsp;web:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@modelcontextprotocol/server-web"]
+              </code>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Usage Examples</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">GitHub Operations</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <p class="text-sm font-semibold mb-2">List your repositories:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Show me my GitHub repositories</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">Check pull requests:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: List open pull requests in openclawce/openclawce</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">Search code:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Search for "MultiProviderRouter" in my repositories</code>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Filesystem Operations</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm font-semibold mb-2">Read files:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Read the contents of config.yaml</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">Create files:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Create a new file called notes.md with a list of todo items</code>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold mb-2">Search content:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Find all files containing "API_KEY" in the current directory</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">GitHub Token Setup</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              To use the GitHub MCP server, create a Personal Access Token:
+            </p>
+
+            <ol class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li><strong>1.</strong> Go to <a href="https://github.com/settings/tokens" class="text-brand-500 hover:underline">github.com/settings/tokens</a></li>
+              <li><strong>2.</strong> Click "Generate new token (classic)"</li>
+              <li><strong>3.</strong> Select scopes:
+                <ul class="ml-6 mt-2 space-y-1 text-sm">
+                  <li>✓ <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">repo</code> - Full repository access</li>
+                  <li>✓ <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">workflow</code> - GitHub Actions access</li>
+                  <li>✓ <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">read:org</code> - Read organization data</li>
+                </ul>
+              </li>
+              <li><strong>4.</strong> Click "Generate token" and copy it</li>
+              <li><strong>5.</strong> Add to your config.yaml as shown above</li>
+            </ol>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Community MCP Servers</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Hundreds of community-built MCP servers available:
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-2">Database Servers</h4>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• PostgreSQL</li>
+                  <li>• MySQL/MariaDB</li>
+                  <li>• MongoDB</li>
+                  <li>• SQLite</li>
+                </ul>
+              </div>
+
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-2">Cloud Services</h4>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• AWS (S3, Lambda, etc.)</li>
+                  <li>• Google Drive</li>
+                  <li>• Slack</li>
+                  <li>• Linear</li>
+                </ul>
+              </div>
+
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-2">Development</h4>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• Docker</li>
+                  <li>• Kubernetes</li>
+                  <li>• Git</li>
+                  <li>• Jira</li>
+                </ul>
+              </div>
+
+              <div class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                <h4 class="font-bold mb-2">Productivity</h4>
+                <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                  <li>• Google Calendar</li>
+                  <li>• Notion</li>
+                  <li>• Obsidian</li>
+                  <li>• Email</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+              Browse all servers at <a href="https://github.com/modelcontextprotocol/servers" class="text-brand-500 hover:underline">github.com/modelcontextprotocol/servers</a>
+            </p>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Building Custom MCP Servers</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Create your own MCP server in any language:
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Example: Simple TypeScript Server</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                import &#123; Server &#125; from "@modelcontextprotocol/sdk/server/index.js";<br/>
+                import &#123; StdioServerTransport &#125; from "@modelcontextprotocol/sdk/server/stdio.js";<br/><br/>
+                const server = new Server(&#123;<br/>
+                &nbsp;&nbsp;name: "my-custom-server",<br/>
+                &nbsp;&nbsp;version: "1.0.0"<br/>
+                &#125;, &#123;<br/>
+                &nbsp;&nbsp;capabilities: &#123; tools: &#123;&#125; &#125;<br/>
+                &#125;);<br/><br/>
+                server.setRequestHandler("tools/list", async () => (&#123;<br/>
+                &nbsp;&nbsp;tools: [&#123; name: "myTool", description: "Does something cool" &#125;]<br/>
+                &#125;));<br/><br/>
+                const transport = new StdioServerTransport();<br/>
+                await server.connect(transport);
+              </code>
+            </div>
+
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              See the <a href="https://modelcontextprotocol.io/docs" class="text-brand-500 hover:underline">MCP SDK documentation</a> for complete examples
+            </p>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

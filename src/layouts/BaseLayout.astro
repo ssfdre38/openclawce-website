@@ -4,6 +4,7 @@ import SEO from '@/components/seo/SEO.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import Analytics from '@/components/layout/Analytics.astro';
 import ConsentBanner from '@/components/ui/overlay/ConsentBanner';
+import CommunityBanner from '@/components/layout/CommunityBanner.astro';
 import { ClientRouter } from 'astro:transitions';
 import { createWebsiteSchema, createOrganizationSchema } from '@/lib/schema';
 import type { WebSite, Organization, WithContext } from 'schema-dts';
@@ -81,10 +82,15 @@ if (includeOrgSchema) {
     <!-- Theme script (runs before render to prevent flash) -->
     <script is:inline>
       (function () {
-        const theme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let theme = localStorage.getItem('theme');
 
-        if (theme === 'dark' || (!theme && systemDark)) {
+        // Default to dark mode if no preference is saved
+        if (!theme) {
+          theme = 'dark';
+          localStorage.setItem('theme', 'dark');
+        }
+
+        if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
@@ -101,6 +107,9 @@ if (includeOrgSchema) {
     >
       Skip to content
     </a>
+
+    <!-- Community Edition Banner -->
+    <CommunityBanner />
 
     <slot name="header" />
 

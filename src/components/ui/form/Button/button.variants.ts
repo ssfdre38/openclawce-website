@@ -25,9 +25,9 @@ export const buttonVariants = cva(
           'bg-destructive text-destructive-foreground hover:bg-destructive/90 active:scale-[0.98]',
       },
       size: {
-        sm: 'h-8 px-3 text-xs [&_svg]:h-4 [&_svg]:w-4',
-        md: 'h-10 px-4 text-sm [&_svg]:h-5 [&_svg]:w-5',
-        lg: 'h-12 px-5 text-base [&_svg]:h-5 [&_svg]:w-5',
+        sm: 'h-8 px-4 text-xs [&_svg]:h-4 [&_svg]:w-4',
+        md: 'h-10 px-6 text-sm [&_svg]:h-5 [&_svg]:w-5',
+        lg: 'h-12 px-8 text-base [&_svg]:h-5 [&_svg]:w-5',
       },
       fullWidth: {
         true: 'w-full',

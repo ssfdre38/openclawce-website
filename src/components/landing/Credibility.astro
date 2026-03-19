@@ -1,18 +1,18 @@
 ---
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 
-const cliFlags = [
-  { flag: '--demo', desc: 'Sample landing page + blog posts' },
-  { flag: '--components', desc: '24 optional UI components' },
-  { flag: '--i18n', desc: 'Multi-language routing configured' },
-  { flag: '--pages', desc: 'Generate pages (+ i18n versions)' },
-  { flag: '-y', desc: 'Skip prompts, use defaults' },
+const features = [
+  { feature: 'Multi-Provider', desc: 'OpenAI, Claude, Gemini, Ollama' },
+  { feature: 'MCP Servers', desc: 'GitHub, filesystem, custom tools' },
+  { feature: 'Browser Relay', desc: 'Real-time web access' },
+  { feature: 'Image Generation', desc: 'Stable Diffusion + SDXL' },
+  { feature: 'Smart Routing', desc: 'Complexity-based model selection' },
 ];
 
 const stats = [
-  { value: '1', label: 'command to start' },
-  { value: '5', label: 'flags to customize' },
-  { value: '40+', label: 'components included' },
+  { value: '1', label: 'config file' },
+  { value: '4+', label: 'AI providers' },
+  { value: '100%', label: 'open source' },
 ];
 ---
 
@@ -24,23 +24,23 @@ const stats = [
       <div
         class="text-brand-500 mb-4 flex items-center gap-2 text-sm font-bold tracking-wide uppercase"
       >
-        <Icon name="terminal" size="sm" />
-        <span>One Command</span>
+        <Icon name="settings" size="sm" />
+        <span>Simple Configuration</span>
       </div>
 
       <h2 class="font-display mb-[var(--space-heading-gap)] text-3xl font-bold text-balance md:text-4xl">
-        Scaffold exactly <span class="text-brand-500">what you need.</span>
+        One YAML file. <span class="text-brand-500">Unlimited possibilities.</span>
       </h2>
 
       <div class="text-foreground-secondary space-y-4 text-lg leading-relaxed">
         <p>
-          Not every project needs everything. The Velocity CLI lets you pick your starting point.
+          OpenClaw CE uses a single configuration file to manage everything - AI providers, tools, features, and routing.
         </p>
         <p>
-          Need custom pages? Use <code class="font-mono text-base text-cyan-400">--pages</code> and they're generated with routes and nav already wired. Pair it with <code class="font-mono text-base text-cyan-400">--i18n</code> and you get localized versions too—translations scaffolded and ready.
+          Want to add Ollama for free local AI? Add a few lines to <code class="font-mono text-base text-cyan-400">config.yaml</code>. Need GitHub integration? Configure an MCP server. Image generation? Enable it with one setting.
         </p>
         <p class="text-foreground-muted">
-          No prompts to click through. No wizard to escape. Just flags that do what they say.
+          No complicated setup. No multiple config files. Just clean, readable YAML that does what it says.
         </p>
       </div>
 
@@ -71,31 +71,25 @@ const stats = [
             <span class="h-3 w-3 rounded-full" style="background-color: var(--warning);"></span>
             <span class="h-3 w-3 rounded-full" style="background-color: var(--success);"></span>
           </div>
-          <span class="text-foreground-muted ml-2 font-mono text-xs">terminal</span>
+          <span class="text-foreground-muted ml-2 font-mono text-xs">~/.openclaw/config.yaml</span>
         </div>
 
         <!-- Terminal Body -->
         <div class="p-5 font-mono text-sm leading-relaxed">
-          <!-- Command Line -->
-          <div class="mb-4 flex items-start gap-2">
-            <span class="shrink-0 text-green-400 select-none">$</span>
-            <div>
-              <span class="text-foreground">pnpm create </span>
-              <span class="text-cyan-400">velocity-astro@latest</span>
-              <span class="text-foreground"> my-site</span>
-            </div>
-          </div>
-
           <!-- Comment -->
-          <div class="text-foreground-muted mb-3 pl-4"># Add what you need</div>
+          <div class="text-foreground-muted mb-3"># Simple, powerful configuration</div>
 
-          <!-- Flags -->
-          <div class="space-y-2 pl-4">
+          <!-- Config snippet -->
+          <div class="space-y-2">
+            <div><span class="text-cyan-400">providers</span><span class="text-foreground">:</span></div>
             {
-              cliFlags.map((item) => (
-                <div class="flex items-center gap-3">
-                  <span class="shrink-0 font-semibold text-cyan-400">{item.flag}</span>
-                  <span class="text-foreground-muted"># {item.desc}</span>
+              features.map((item) => (
+                <div class="flex items-start gap-3 pl-4">
+                  <span class="shrink-0 text-green-400">✓</span>
+                  <div>
+                    <span class="font-semibold text-foreground">{item.feature}</span>
+                    <span class="text-foreground-muted text-xs block">{item.desc}</span>
+                  </div>
                 </div>
               ))
             }
@@ -105,9 +99,9 @@ const stats = [
           <div class="border-border mt-6 border-t pt-4">
             <div class="flex items-center gap-2">
               <span class="text-green-400">✓</span>
-              <span class="text-foreground">Project created successfully!</span>
+              <span class="text-foreground">All features configured!</span>
             </div>
-            <div class="text-foreground-muted mt-1 pl-5">cd my-site && pnpm dev</div>
+            <div class="text-foreground-muted mt-1 pl-5">./openclaw chat</div>
           </div>
         </div>
       </div>

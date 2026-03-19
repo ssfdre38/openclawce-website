@@ -8,36 +8,35 @@ import SocialProof from '@/components/ui/marketing/SocialProof/SocialProof.astro
 import { TerminalDemo } from '@/components/ui/marketing/TerminalDemo';
 import TechStack from '@/components/landing/TechStack.astro';
 import FeatureTabs from '@/components/landing/FeatureTabs.tsx';
-import LighthouseScores from '@/components/landing/LighthouseScores.astro';
 import Credibility from '@/components/landing/Credibility.astro';
 import CTA from '@/components/landing/CTA.astro';
 ---
 
 <LandingLayout
-  title="The Complete Astro Starter"
-  description="Design tokens, accessible components, SEO, and i18n configured from the first commit. Velocity ships what other starters leave as homework."
+  title="OpenClaw CE - Open Source AI Agent Platform"
+  description="Build powerful AI agents with OpenClaw Community Edition. Open source, self-hosted, and built for developers who want full control over their AI automation."
 >
   <Hero layout="split" size="lg" showGrid showBlob blobPosition="right">
-    <Badge slot="badge" pill pulse>v1.0 Public Beta is Live</Badge>
+    <Badge slot="badge" pill pulse>Community Edition - Open Source</Badge>
 
     <h1 slot="title">
-      Your next site <span class="text-brand-500">starts here.</span>
+      Your Personal AI Assistant<br />
+      <span class="text-brand-500">Runs Everywhere</span>
     </h1>
 
     <p slot="description">
-      Design tokens, accessible components, SEO, and i18n configured from the first commit. Velocity
-      ships what other starters leave as homework.
+      OpenClaw CE combines the best AI models (OpenAI, Claude, Gemini, Ollama) with powerful tools (GitHub, web browsing, image generation) in a beautiful desktop app and CLI. Free, open-source, and runs entirely on your machine.
     </p>
 
     <Fragment slot="actions">
-      <Button size="lg" href="https://docs.deployvelocity.com" target="_blank">
-        View Docs
+      <Button size="lg" href="/downloads">
+        Get Started
         <Icon name="arrow-right" size="sm" />
       </Button>
       <Button
         size="lg"
         variant="outline"
-        href="https://github.com/southwellmedia/velocity"
+        href="https://github.com/ssfdre38/openclaw-community-edition"
         target="_blank"
       >
         <Icon name="github" size="sm" />
@@ -49,18 +48,17 @@ import CTA from '@/components/landing/CTA.astro';
 
     <SocialProof
       class="mt-[var(--space-stack-lg)]"
-      text="Shipped to production weekly."
+      text="Trusted by developers worldwide"
       avatars={[
         'https://i.pravatar.cc/150?img=12',
         'https://i.pravatar.cc/150?img=33',
-        'https://www.southwellmedia.com/_vercel/image?url=%2Fassets%2FMichaelFroseth2025.jpg&w=828&q=90',
+        'https://i.pravatar.cc/150?img=47',
       ]}
     />
   </Hero>
 
   <TechStack />
   <FeatureTabs client:visible />
-  <LighthouseScores />
   <Credibility />
   <CTA />
 </LandingLayout>

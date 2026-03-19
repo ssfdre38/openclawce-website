@@ -1,0 +1,324 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+---
+
+<PageLayout
+  title="Browser Relay - OpenClaw CE"
+  description="Enable web browsing for your AI assistant"
+>
+  <Container>
+    <Section>
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <Badge pill class="mb-4">Advanced Features</Badge>
+          <h1 class="text-4xl font-bold mb-4">Browser Relay</h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            Give your AI assistant the power to browse the web, fetch content, and stay up-to-date
+          </p>
+        </div>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">What is Browser Relay?</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Browser Relay is a built-in web browsing service that allows OpenClaw CE to:
+            </p>
+            <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Fetch web pages:</strong> Access current information from any URL</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Parse content:</strong> Extract clean text from HTML</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Handle JavaScript:</strong> Works with dynamic websites</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Search the web:</strong> Find and retrieve relevant information</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-500">✓</span>
+                <span><strong>Stay current:</strong> Get real-time news, docs, and updates</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Setup</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">1. Start Browser Relay Service</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                # Browser relay is included with OpenClaw CE<br/>
+                # Start as a background service:<br/><br/>
+                ./openclaw relay start<br/><br/>
+                # Or specify a custom port:<br/>
+                ./openclaw relay start --port 8080
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">2. Configure in config.yaml</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                browser_relay:<br/>
+                &nbsp;&nbsp;enabled: true<br/>
+                &nbsp;&nbsp;endpoint: http://localhost:8080<br/>
+                &nbsp;&nbsp;timeout: 30  # seconds<br/>
+                &nbsp;&nbsp;max_retries: 3
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">3. Verify It's Running</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                # Check status<br/>
+                ./openclaw relay status<br/><br/>
+                # Test with a URL<br/>
+                curl http://localhost:8080/fetch?url=https://example.com
+              </code>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Usage in Conversations</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm font-semibold mb-2">Fetch a specific webpage:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: What does the Python.org homepage say about the latest release?</code>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold mb-2">Get current information:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Search for recent breakthroughs in quantum computing</code>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold mb-2">Compare information:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Compare the features listed on OpenAI and Anthropic's websites</code>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold mb-2">Research documentation:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Read the React 19 documentation and summarize what's new</code>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold mb-2">Monitor updates:</p>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm">
+                  <code>You: Check the OpenClaw CE GitHub releases page for the latest version</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Features</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold mb-3">Content Processing</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>✓ HTML to clean text conversion</li>
+                  <li>✓ Removes ads and navigation</li>
+                  <li>✓ Preserves article structure</li>
+                  <li>✓ Extracts metadata (title, author, date)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold mb-3">Reliability</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>✓ Automatic retry on failure</li>
+                  <li>✓ Timeout protection</li>
+                  <li>✓ Error handling</li>
+                  <li>✓ Rate limiting support</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold mb-3">Compatibility</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>✓ JavaScript-rendered pages</li>
+                  <li>✓ Dynamic content loading</li>
+                  <li>✓ Modern web frameworks</li>
+                  <li>✓ RESTful APIs</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold mb-3">Privacy</h4>
+                <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  <li>✓ Runs locally on your machine</li>
+                  <li>✓ No data sent to third parties</li>
+                  <li>✓ You control what's accessed</li>
+                  <li>✓ Optional request logging</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Advanced Configuration</h2>
+            
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+              <code>
+                browser_relay:<br/>
+                &nbsp;&nbsp;enabled: true<br/>
+                &nbsp;&nbsp;endpoint: http://localhost:8080<br/>
+                &nbsp;&nbsp;<br/>
+                &nbsp;&nbsp;# Timeouts<br/>
+                &nbsp;&nbsp;timeout: 30  # Page load timeout in seconds<br/>
+                &nbsp;&nbsp;max_retries: 3<br/>
+                &nbsp;&nbsp;retry_delay: 2  # Seconds between retries<br/>
+                &nbsp;&nbsp;<br/>
+                &nbsp;&nbsp;# Content limits<br/>
+                &nbsp;&nbsp;max_content_length: 50000  # Characters<br/>
+                &nbsp;&nbsp;max_redirects: 5<br/>
+                &nbsp;&nbsp;<br/>
+                &nbsp;&nbsp;# User agent<br/>
+                &nbsp;&nbsp;user_agent: "OpenClawCE/1.0 (compatible; +http://openclawce.com)"<br/>
+                &nbsp;&nbsp;<br/>
+                &nbsp;&nbsp;# Logging<br/>
+                &nbsp;&nbsp;log_requests: true<br/>
+                &nbsp;&nbsp;log_level: info  # debug, info, warn, error
+              </code>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">API Endpoints</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              The browser relay exposes a simple HTTP API:
+            </p>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold mb-2">GET /fetch</h4>
+                <div class="bg-neutral-100 dark:bg-neutral-800 p-3 rounded-lg text-sm mb-2">
+                  <code>GET http://localhost:8080/fetch?url=https://example.com</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Fetches and returns clean text content from a URL
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-2">GET /search</h4>
+                <div class="bg-neutral-100 dark:bg-neutral-800 p-3 rounded-lg text-sm mb-2">
+                  <code>GET http://localhost:8080/search?q=openclawce</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Performs a web search and returns results with snippets
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-2">GET /health</h4>
+                <div class="bg-neutral-100 dark:bg-neutral-800 p-3 rounded-lg text-sm mb-2">
+                  <code>GET http://localhost:8080/health</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Returns service health status
+                </p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Troubleshooting</h2>
+            
+            <div class="space-y-4">
+              <div class="border-l-4 border-yellow-500 pl-4">
+                <h4 class="font-bold mb-2">Service won't start</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Check if port 8080 is already in use. Use <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">--port</code> to specify a different port.
+                </p>
+              </div>
+
+              <div class="border-l-4 border-yellow-500 pl-4">
+                <h4 class="font-bold mb-2">Timeouts on slow pages</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Increase the <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">timeout</code> value in config.yaml. Some dynamic sites need 60+ seconds.
+                </p>
+              </div>
+
+              <div class="border-l-4 border-yellow-500 pl-4">
+                <h4 class="font-bold mb-2">JavaScript-heavy sites fail</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Enable debug logging to see what's happening. Some sites may block automated access.
+                </p>
+              </div>
+
+              <div class="border-l-4 border-yellow-500 pl-4">
+                <h4 class="font-bold mb-2">Rate limiting errors</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  Increase <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">retry_delay</code> to space out requests. Some sites limit request frequency.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Use Cases</h2>
+            
+            <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Research:</strong> Gather information from multiple sources for reports and analysis</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Development:</strong> Read docs, check compatibility, find code examples</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>News:</strong> Stay updated on industry trends and current events</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Monitoring:</strong> Track website changes, release notes, status pages</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500 font-bold">→</span>
+                <span><strong>Comparison:</strong> Compare products, pricing, features across websites</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

@@ -1,0 +1,14 @@
+---
+/**
+ * Section - Semantic section wrapper with vertical padding
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class:list={["py-20", className]}>
+  <slot />
+</section>

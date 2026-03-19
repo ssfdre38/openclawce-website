@@ -11,90 +11,135 @@ import { Hero } from '@/components/hero';
 ---
 
 <PageLayout
-  title="About Us"
-  description="Learn about Velocity and the team behind it."
+  title="About OpenClaw CE"
+  description="Learn about OpenClaw Community Edition and why we created it."
 >
   <Hero layout="centered" size="sm" showGrid>
-    <Badge slot="badge" pill pulse>Our Story</Badge>
+    <Badge slot="badge" pill pulse>Why Community Edition?</Badge>
 
     <h1 slot="title">
-      Built by developers, <span class="text-brand-500">for developers.</span>
+      Open source AI for <span class="text-brand-500">everyone.</span>
     </h1>
 
     <p slot="description">
-      Velocity was born from the frustration of setting up the same tooling over and over.
-      We decided to create the starter we always wished existed.
+      OpenClaw Community Edition was created to give developers complete control over their AI infrastructure.
+      No vendor lock-in, no usage limits, no privacy concerns.
     </p>
   </Hero>
 
-  <!-- Mission Section -->
+  <!-- Origin Story Section -->
   <section class="py-20 bg-surface-invert">
-    <div class="mx-auto max-w-4xl px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-on-invert mb-6">
-        Our Mission
+    <div class="mx-auto max-w-4xl px-6">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-on-invert mb-6 text-center">
+        Why We Built This
       </h2>
-      <p class="text-lg text-on-invert-secondary max-w-2xl mx-auto leading-relaxed">
-        To help developers ship beautiful, performant websites faster by eliminating
-        boilerplate and providing sensible defaults.
-      </p>
+      <div class="space-y-4 text-lg text-on-invert-secondary leading-relaxed">
+        <p>
+          OpenClaw is an MIT-licensed open-source AI agent platform with solid core features.
+          However, as developers submitted pull requests for new capabilities and improvements,
+          many contributions were not being accepted or merged in a timely manner.
+        </p>
+        <p>
+          <strong class="text-on-invert">OpenClaw Community Edition</strong> was born out of this need for faster innovation.
+          We forked the codebase to create a community-driven version where developers can contribute freely,
+          experiment with new features, and ship improvements without waiting for upstream approval.
+        </p>
+        <p>
+          Since the fork, we've added multi-provider routing, Ollama integration, MCP servers, image generation,
+          browser relay, and dozens of bug fixes. The goal is simple: empower developers to build and contribute
+          without barriers, while maintaining the MIT license and open-source spirit.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Values Section -->
+  <!-- Core Principles Section -->
   <section class="py-20">
     <div class="mx-auto max-w-6xl px-6">
       <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground mb-12 text-center">
-        What We Believe
+        What Drives Us
       </h2>
 
       <div class="grid gap-8 md:grid-cols-3">
-        <!-- Performance -->
+        <!-- Community-Driven -->
+        <Card hover>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="users" size="md" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-bold text-foreground">Community-Driven</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                PRs welcome and actively reviewed. We ship features fast and listen to
+                what developers actually need.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Privacy First -->
+        <Card hover>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
+              <Icon name="shield" size="md" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-bold text-foreground">Privacy First</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
+                Self-hosted means your data stays with you. Use local models with Ollama
+                or any provider you trust.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <!-- Move Fast -->
         <Card hover>
           <div class="flex items-start gap-4">
             <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
               <Icon name="zap" size="md" />
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-base font-bold text-foreground">Performance First</h3>
+              <h3 class="text-base font-bold text-foreground">Move Fast</h3>
               <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Every decision is made with performance in mind. Zero JavaScript by default,
-                optimized images, and minimal CSS.
+                No waiting for upstream approval. Experiment, iterate, and ship features
+                when they're ready.
               </p>
             </div>
           </div>
         </Card>
+      </div>
+    </div>
+  </section>
 
-        <!-- Simplicity -->
-        <Card hover>
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
-              <Icon name="box" size="md" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-base font-bold text-foreground">Simplicity Matters</h3>
-              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                We strip away complexity so you can focus on what matters: building
-                great products for your users.
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <!-- Open Source -->
-        <Card hover>
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 flex items-center justify-center text-brand-500 shrink-0">
-              <Icon name="github" size="md" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="text-base font-bold text-foreground">Open Source</h3>
-              <p class="text-sm text-foreground-muted leading-relaxed mt-1.5">
-                Velocity is free and open source. We believe in giving back to the
-                community that made this possible.
-              </p>
-            </div>
-          </div>
-        </Card>
+  <!-- Key Differences Section -->
+  <section class="py-20 bg-surface-invert">
+    <div class="mx-auto max-w-4xl px-6">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-on-invert mb-8 text-center">
+        What Makes CE Different
+      </h2>
+      <div class="space-y-6 text-on-invert-secondary">
+        <div class="bg-surface/10 rounded-lg p-6 border border-on-invert/10">
+          <h3 class="text-lg font-bold text-on-invert mb-2">OpenClaw (Original)</h3>
+          <ul class="space-y-2 text-sm leading-relaxed">
+            <li>• MIT License - Open source</li>
+            <li>• Core AI agent functionality</li>
+            <li>• Standard provider integrations</li>
+            <li>• Maintained by original team</li>
+          </ul>
+        </div>
+        <div class="bg-brand-500/10 rounded-lg p-6 border border-brand-500/20">
+          <h3 class="text-lg font-bold text-on-invert mb-2">OpenClaw CE (Community Edition)</h3>
+          <ul class="space-y-2 text-sm leading-relaxed">
+            <li>• <strong>MIT License</strong> - Open source fork</li>
+            <li>• <strong>Enhanced routing</strong> - Multi-tier model selection based on complexity</li>
+            <li>• <strong>Local models</strong> - Full Ollama integration for privacy and offline use</li>
+            <li>• <strong>MCP servers</strong> - GitHub, filesystem, web search, and custom tool integration</li>
+            <li>• <strong>Image generation</strong> - Built-in Stable Diffusion (SD 1.5 + SDXL)</li>
+            <li>• <strong>Browser relay</strong> - Web browsing capabilities for AI agents</li>
+            <li>• <strong>Community-driven</strong> - Features and fixes from developers worldwide</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>

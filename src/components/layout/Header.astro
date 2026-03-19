@@ -59,7 +59,7 @@ interface Props extends HTMLAttributes<'header'> {
   shape?: 'bar' | 'floating';
   /** Override default navigation (replaces getNavRoutes()) */
   nav?: NavItem[];
-  /** Additional navigation items (e.g., #features for landing pages) */
+  /** Additional navigation items */
   extraNav?: NavItem[];
   /** Show CTA button */
   showCta?: boolean;
@@ -91,7 +91,7 @@ const {
   nav,
   extraNav = [],
   showCta = false,
-  cta = { label: 'View Docs', href: 'https://docs.deployvelocity.com' },
+  cta = { label: 'Get Started', href: '/docs/quick-start' },
   actions = [],
   showThemeToggle = true,
   showMobileMenu = true,

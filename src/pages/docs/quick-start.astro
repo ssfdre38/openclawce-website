@@ -1,0 +1,264 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/layout/Container/Container.astro';
+import Section from '@/components/ui/layout/Section/Section.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+---
+
+<PageLayout
+  title="Quick Start - OpenClaw CE"
+  description="Get started with OpenClaw CE in under 5 minutes"
+>
+  <Container>
+    <Section>
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <Badge pill class="mb-4">Getting Started</Badge>
+          <h1 class="text-4xl font-bold mb-4">Quick Start Guide</h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            Get OpenClaw CE running in under 5 minutes
+          </p>
+        </div>
+
+        <Card class="mb-8 bg-gradient-to-r from-brand-500/5 to-brand-600/5 border-brand-500/20">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-4">What You'll Need</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+                <li>✓ Node.js 18+ (with npm or pnpm)</li>
+                <li>✓ Git</li>
+                <li>✓ 4GB RAM minimum</li>
+              </ul>
+              <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+                <li>✓ API keys (OpenAI, Anthropic, or use Ollama)</li>
+                <li>✓ Windows, macOS, or Linux</li>
+                <li>✓ Terminal/Command Prompt</li>
+              </ul>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Step 1: Install OpenClaw CE</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">Clone the Repository</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                git clone -b discord-fix https://github.com/ssfdre38/openclaw-community-edition.git<br/>
+                cd openclaw-community-edition
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Install Dependencies</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                # Using npm<br/>
+                npm install<br/><br/>
+                # Or using pnpm (recommended)<br/>
+                pnpm install
+              </code>
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              OpenClaw CE is a Node.js/TypeScript application
+            </p>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Step 2: Configure Your AI Provider</h2>
+            
+            <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+              Create a configuration file at <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">~/.openclaw/config.yaml</code>:
+            </p>
+
+            <h3 class="text-xl font-semibold mb-3">Option A: Cloud Provider (OpenAI or Anthropic)</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                providers:<br/>
+                &nbsp;&nbsp;- name: openai<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;type: openai<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;api_key: your-openai-api-key<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;models:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- gpt-4<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- gpt-3.5-turbo<br/><br/>
+                &nbsp;&nbsp;- name: anthropic<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;type: anthropic<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;api_key: your-anthropic-api-key<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;models:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- claude-3-5-sonnet-20241022<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- claude-3-haiku-20240307<br/><br/>
+                default_provider: openai<br/>
+                default_model: gpt-4
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Option B: Local with Ollama (Free!)</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                providers:<br/>
+                &nbsp;&nbsp;- name: ollama<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;type: ollama<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;endpoint: http://localhost:11434<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;models:<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- llama3.2:latest<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- qwen2.5-coder:7b<br/><br/>
+                default_provider: ollama<br/>
+                default_model: llama3.2:latest
+              </code>
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              See <a href="/docs/ollama" class="text-brand-500 hover:underline">Ollama Integration Guide</a> for setup details
+            </p>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Step 3: Start the Gateway</h2>
+            
+            <h3 class="text-xl font-semibold mb-3">Launch Gateway Server</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                # Start the gateway (web UI + API server)<br/>
+                openclaw gateway<br/><br/>
+                # Or with verbose logging<br/>
+                openclaw gateway --verbose<br/><br/>
+                # Custom port<br/>
+                openclaw gateway --port 18789
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Access the Web UI</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+              <code>
+                # Gateway starts on http://localhost:18789<br/>
+                # Open in your browser to access the web interface
+              </code>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3">Send Messages to AI</h3>
+            <div class="bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4">
+              <code>
+                # Talk to the AI agent<br/>
+                openclaw agent --message "Hello, OpenClaw!"<br/><br/>
+                # With high thinking mode<br/>
+                openclaw agent --message "Explain AI routing" --thinking high
+              </code>
+            </div>
+
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The gateway enables web UI, relay servers, and bot integrations. It's the control plane for OpenClaw.
+            </p>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Step 4: Try Key Features</h2>
+            
+            <div class="space-y-6">
+              <div>
+                <h4 class="font-semibold mb-2">Browse the Web</h4>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm overflow-x-auto">
+                  <code>You: Search for the latest news on AI breakthroughs</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                  Built-in browser relay fetches and processes web content
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-2">Generate Images</h4>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm overflow-x-auto">
+                  <code>You: Generate an image of a mountain landscape at sunset</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                  Requires image generation server setup - see <a href="/docs/image-generation" class="text-brand-500 hover:underline">Image Generation guide</a>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-2">Work with GitHub</h4>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm overflow-x-auto">
+                  <code>You: List my recent GitHub pull requests</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                  Requires MCP GitHub server - see <a href="/docs/mcp-servers" class="text-brand-500 hover:underline">MCP Servers guide</a>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-2">Use Multi-Tier Routing</h4>
+                <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-sm overflow-x-auto">
+                  <code>You: [simple question gets fast model, complex query gets powerful model]</code>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                  Automatically routes to optimal model based on complexity
+                </p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card class="mb-8">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Common Commands</h2>
+            
+            <div class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <code class="bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded block mb-2">openclaw gateway</code>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400">Start the gateway server (web UI + relay)</p>
+                </div>
+                <div>
+                  <code class="bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded block mb-2">openclaw agent --message "Hello"</code>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400">Send message to AI agent</p>
+                </div>
+                <div>
+                  <code class="bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded block mb-2">openclaw onboard</code>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400">Run setup wizard</p>
+                </div>
+                <div>
+                  <code class="bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded block mb-2">openclaw doctor</code>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400">Diagnose configuration issues</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold mb-6">Next Steps</h2>
+            
+            <ul class="space-y-3">
+              <li class="flex gap-3">
+                <span class="text-brand-500">→</span>
+                <span><a href="/docs/ollama" class="text-brand-500 hover:underline font-semibold">Set up Ollama</a> for free local AI</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500">→</span>
+                <span><a href="/docs/mcp-servers" class="text-brand-500 hover:underline font-semibold">Configure MCP Servers</a> for GitHub, filesystem access, and custom tools</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500">→</span>
+                <span><a href="/docs/image-generation" class="text-brand-500 hover:underline font-semibold">Enable Image Generation</a> with Stable Diffusion</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500">→</span>
+                <span><a href="/docs/browser-relay" class="text-brand-500 hover:underline font-semibold">Configure Browser Relay</a> for web access</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-500">→</span>
+                <span><a href="/docs/multi-provider" class="text-brand-500 hover:underline font-semibold">Add Multiple Providers</a> for flexibility</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  </Container>
+</PageLayout>

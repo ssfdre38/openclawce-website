@@ -22,64 +22,69 @@ interface ScriptLine {
   type: LineType;
 }
 
-// Replicate the actual CLI experience from create-velocity-astro
+// Replicate installing OpenClaw Community Edition
 const script: ScriptLine[] = [
-  // Initial command
-  { text: '$ pnpm create velocity-astro@latest', delay: 1200, type: 'command' },
-  { text: '', delay: 300, type: 'command' },
+  // Initial command with correct repo
+  { text: '$ git clone -b discord-fix https://github.com/ssfdre38/openclaw-community-edition.git', delay: 1200, type: 'command' },
+  { text: 'Cloning into \'openclaw-community-edition\'...', delay: 300, type: 'success' },
+  { text: 'Receiving objects: 100%', delay: 400, type: 'success' },
+  { text: '', delay: 200, type: 'command' },
 
-  // Intro banner (clack style)
-  { text: '┌  Create Velocity', delay: 400, type: 'intro' },
+  { text: '$ cd openclaw-community-edition', delay: 600, type: 'command' },
+  { text: '', delay: 200, type: 'command' },
+
+  // Intro banner
+  { text: '┌  OpenClaw Community Edition', delay: 400, type: 'intro' },
   { text: '│', delay: 100, type: 'prompt-label' },
 
-  // Project name prompt
-  { text: '◇  What is your project name?', delay: 400, type: 'prompt-label' },
-  { text: '│  my-awesome-site', delay: 800, type: 'prompt-input' },
+  // Build the application
+  { text: '◇  Installing dependencies...', delay: 400, type: 'select-label' },
+  { text: '│', delay: 200, type: 'prompt-label' },
+  
+  { text: '$ npm install', delay: 800, type: 'command' },
+  { text: '◐  Installing packages...', delay: 400, type: 'spinner' },
+  { text: '✔  Dependencies installed successfully', delay: 300, type: 'success' },
   { text: '│', delay: 200, type: 'prompt-label' },
 
-  // Demo content selection
-  { text: '◇  Include demo landing page and sample content?', delay: 400, type: 'select-label' },
-  { text: '│  ○ No  · Minimal starter with basic pages', delay: 300, type: 'select-option' },
-  { text: '│  ● Yes · Full demo with landing page, blog posts', delay: 600, type: 'select-option-active' },
+  // Configuration prompt
+  { text: '◇  Which AI provider would you like to use?', delay: 400, type: 'select-label' },
+  { text: '│  ○ OpenAI (GPT-4, GPT-3.5)', delay: 300, type: 'select-option' },
+  { text: '│  ○ Anthropic (Claude)', delay: 250, type: 'select-option' },
+  { text: '│  ● Ollama (Free, Local)', delay: 600, type: 'select-option-active' },
   { text: '│', delay: 200, type: 'prompt-label' },
 
-  // Components library selection
-  { text: '◇  Include UI component library?', delay: 400, type: 'select-label' },
-  { text: '│  ● Yes · Buttons, forms, cards, dialogs, etc.', delay: 500, type: 'select-option-active' },
+  // Model selection
+  { text: '◇  Which Ollama model?', delay: 400, type: 'select-label' },
+  { text: '│  ● llama3.2 · Fast and capable', delay: 500, type: 'select-option-active' },
   { text: '│', delay: 200, type: 'prompt-label' },
 
-  // i18n selection
-  { text: '◇  Add internationalization (i18n)?', delay: 400, type: 'select-label' },
-  { text: '│  ● Yes · Locale routing, translations', delay: 500, type: 'select-option-active' },
-  { text: '│', delay: 200, type: 'prompt-label' },
-
-  // Package manager selection
-  { text: '◇  Which package manager?', delay: 400, type: 'select-label' },
-  { text: '│  ● pnpm · recommended', delay: 400, type: 'select-option-active' },
+  // Additional features
+  { text: '◇  Enable additional features?', delay: 400, type: 'select-label' },
+  { text: '│  ● MCP Servers · GitHub, filesystem tools', delay: 400, type: 'select-option-active' },
+  { text: '│  ● Browser Relay · Web browsing', delay: 350, type: 'select-option-active' },
+  { text: '│  ● Image Generation · SD + SDXL', delay: 350, type: 'select-option-active' },
   { text: '│', delay: 300, type: 'prompt-label' },
 
-  // Scaffolding progress
-  { text: '◐  Scaffolding project...', delay: 400, type: 'spinner' },
-  { text: '✔  Scaffolding project', delay: 300, type: 'success' },
-  { text: '◐  Copying demo content...', delay: 300, type: 'spinner' },
-  { text: '✔  Copying demo content', delay: 250, type: 'success' },
-  { text: '◐  Setting up components...', delay: 300, type: 'spinner' },
-  { text: '✔  Setting up components', delay: 250, type: 'success' },
-  { text: '◐  Configuring i18n...', delay: 300, type: 'spinner' },
-  { text: '✔  Configuring i18n', delay: 250, type: 'success' },
+  // Setup progress
+  { text: '◐  Downloading Ollama models...', delay: 400, type: 'spinner' },
+  { text: '✔  Downloaded llama3.2 (4.7GB)', delay: 300, type: 'success' },
+  { text: '◐  Configuring MCP servers...', delay: 300, type: 'spinner' },
+  { text: '✔  MCP servers ready', delay: 250, type: 'success' },
+  { text: '◐  Starting browser relay...', delay: 300, type: 'spinner' },
+  { text: '✔  Browser relay on port 8080', delay: 250, type: 'success' },
   { text: '│', delay: 200, type: 'prompt-label' },
 
-  // Next steps note (clack style)
+  // Next steps note
   { text: '◇  Next steps ─────────────────────╮', delay: 300, type: 'note-header' },
   { text: '│                                  │', delay: 50, type: 'note-content' },
-  { text: '│  cd my-awesome-site              │', delay: 100, type: 'note-content' },
-  { text: '│  pnpm dev                        │', delay: 100, type: 'note-content' },
+  { text: '│  ./openclaw chat                 │', delay: 100, type: 'note-content' },
+  { text: '│  ./openclaw-ui    # Desktop app  │', delay: 100, type: 'note-content' },
   { text: '│                                  │', delay: 50, type: 'note-content' },
   { text: '├──────────────────────────────────╯', delay: 200, type: 'note-content' },
   { text: '│', delay: 100, type: 'prompt-label' },
 
   // Outro
-  { text: '└  Happy building! 🚀', delay: 0, type: 'outro' },
+  { text: '└  Your AI assistant is ready! 🚀', delay: 0, type: 'outro' },
 ];
 
 export function TerminalDemo() {
