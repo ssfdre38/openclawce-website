@@ -30,6 +30,80 @@ const githubReleasesUrl = 'https://github.com/ssfdre38/openclaw-community-editio
         </p>
       </div>
 
+      <!-- npm Package - Recommended -->
+      <Card class="mb-8 border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-green-500/10">
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-3 rounded-full bg-emerald-500 text-white">
+              <Icon name="box" size="xl" />
+            </div>
+            <div>
+              <Badge pill class="bg-emerald-500 text-white mb-2">Recommended</Badge>
+              <h2 class="text-2xl font-bold">Install via npm (Easiest!)</h2>
+              <p class="text-sm text-neutral-500">One command, works everywhere, automatic updates</p>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6 mb-4">
+            <!-- npm Registry -->
+            <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border-2 border-emerald-500/30">
+              <div class="flex items-center gap-2 mb-3">
+                <Icon name="npm" class="text-red-500" />
+                <h3 class="font-bold">npm Registry</h3>
+              </div>
+              <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-xs mb-3">
+                <code>npm install -g openclaw-ce</code>
+              </div>
+              <p class="text-xs text-neutral-500 mb-2">
+                ✅ Simplest installation<br/>
+                ✅ No GitHub account needed<br/>
+                ✅ Auto-downloads right binaries for your OS
+              </p>
+              <Button 
+                href="https://www.npmjs.com/package/openclaw-ce" 
+                variant="outline" 
+                size="sm" 
+                class="w-full mt-2"
+                target="_blank"
+              >
+                <Icon name="external-link" size="sm" />
+                View on npm
+              </Button>
+            </div>
+
+            <!-- GitHub Packages -->
+            <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
+              <div class="flex items-center gap-2 mb-3">
+                <Icon name="github" class="text-neutral-700 dark:text-neutral-300" />
+                <h3 class="font-bold">GitHub Packages</h3>
+              </div>
+              <div class="bg-neutral-900 text-neutral-100 p-3 rounded-lg font-mono text-xs mb-3">
+                <div class="mb-2"># One-time setup:</div>
+                <div class="mb-2">echo "@ssfdre38:registry=https://npm.pkg.github.com" >> ~/.npmrc</div>
+                <div># Install:</div>
+                <div>npm install -g @ssfdre38/openclaw-ce</div>
+              </div>
+              <Button 
+                href="https://github.com/ssfdre38?tab=packages" 
+                variant="outline" 
+                size="sm" 
+                class="w-full"
+                target="_blank"
+              >
+                <Icon name="external-link" size="sm" />
+                View on GitHub
+              </Button>
+            </div>
+          </div>
+
+          <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">
+              <strong>After installing:</strong> Run <code class="bg-neutral-800 px-2 py-1 rounded text-emerald-400">openclaw-ce gateway start</code> to launch!
+            </p>
+          </div>
+        </div>
+      </Card>
+
       <!-- Quick Start Guide -->
       <Card class="mb-12 border-brand-500/30 bg-gradient-to-br from-brand-500/5 to-purple-500/5">
         <div class="p-8">
@@ -37,7 +111,7 @@ const githubReleasesUrl = 'https://github.com/ssfdre38/openclaw-community-editio
             <div class="p-3 rounded-full bg-brand-500 text-white">
               <Icon name="zap" size="xl" />
             </div>
-            <h2 class="text-2xl font-bold">Which option is right for me?</h2>
+            <h2 class="text-2xl font-bold">Other Installation Methods</h2>
           </div>
           
           <div class="grid md:grid-cols-3 gap-6">
@@ -45,13 +119,13 @@ const githubReleasesUrl = 'https://github.com/ssfdre38/openclaw-community-editio
             <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <div class="flex items-center gap-2 mb-3">
                 <Icon name="rocket" class="text-green-500" />
-                <h3 class="font-bold text-green-600 dark:text-green-400">Fastest Start</h3>
+                <h3 class="font-bold text-green-600 dark:text-green-400">Pre-built Binary</h3>
               </div>
               <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
                 Download a <strong>pre-built binary</strong> below. No Node.js install needed - just extract and run!
               </p>
               <p class="text-xs text-neutral-500">
-                ✅ Best for: Quick evaluation, no dev tools needed
+                ✅ Best for: Offline installs, air-gapped systems
               </p>
             </div>
 
@@ -59,7 +133,7 @@ const githubReleasesUrl = 'https://github.com/ssfdre38/openclaw-community-editio
             <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <div class="flex items-center gap-2 mb-3">
                 <Icon name="box" class="text-brand-500" />
-                <h3 class="font-bold text-brand-600 dark:text-brand-400">Production Ready</h3>
+                <h3 class="font-bold text-brand-600 dark:text-brand-400">Docker</h3>
               </div>
               <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
                 Use <strong>Docker</strong> for easy deployment, updates, and isolation. Runs anywhere Docker runs.
@@ -73,13 +147,13 @@ const githubReleasesUrl = 'https://github.com/ssfdre38/openclaw-community-editio
             <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
               <div class="flex items-center gap-2 mb-3">
                 <Icon name="code" class="text-purple-500" />
-                <h3 class="font-bold text-purple-600 dark:text-purple-400">Full Control</h3>
+                <h3 class="font-bold text-purple-600 dark:text-purple-400">Build from Source</h3>
               </div>
               <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
                 Run the <strong>automated installer</strong> to build from source. Customize everything.
               </p>
               <p class="text-xs text-neutral-500">
-                ✅ Best for: Developers, customization, local AI models
+                ✅ Best for: Developers, customization, contributions
               </p>
             </div>
           </div>

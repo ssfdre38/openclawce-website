@@ -24,27 +24,15 @@ interface ScriptLine {
 
 // Replicate installing OpenClaw Community Edition
 const script: ScriptLine[] = [
-  // Initial command with correct repo
-  { text: '$ git clone -b discord-fix https://github.com/ssfdre38/openclaw-community-edition.git', delay: 1200, type: 'command' },
-  { text: 'Cloning into \'openclaw-community-edition\'...', delay: 300, type: 'success' },
-  { text: 'Receiving objects: 100%', delay: 400, type: 'success' },
-  { text: '', delay: 200, type: 'command' },
-
-  { text: '$ cd openclaw-community-edition', delay: 600, type: 'command' },
-  { text: '', delay: 200, type: 'command' },
+  // npm install - the easiest way!
+  { text: '$ npm install -g openclaw-ce', delay: 1200, type: 'command' },
+  { text: '◐  Downloading openclaw-ce...', delay: 400, type: 'spinner' },
+  { text: '✔  openclaw-ce@2026.3.24-ce.1 installed', delay: 600, type: 'success' },
+  { text: '', delay: 300, type: 'command' },
 
   // Intro banner
   { text: '┌  OpenClaw Community Edition', delay: 400, type: 'intro' },
   { text: '│', delay: 100, type: 'prompt-label' },
-
-  // Build the application
-  { text: '◇  Installing dependencies...', delay: 400, type: 'select-label' },
-  { text: '│', delay: 200, type: 'prompt-label' },
-  
-  { text: '$ npm install', delay: 800, type: 'command' },
-  { text: '◐  Installing packages...', delay: 400, type: 'spinner' },
-  { text: '✔  Dependencies installed successfully', delay: 300, type: 'success' },
-  { text: '│', delay: 200, type: 'prompt-label' },
 
   // Configuration prompt
   { text: '◇  Which AI provider would you like to use?', delay: 400, type: 'select-label' },
